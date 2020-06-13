@@ -1,0 +1,20 @@
+<div class="animated fadeIn">
+
+  <Label class="ad-label" textWrap="true">
+   {{id}}
+</Label>
+  <br>
+  <br>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Company Name</label>
+      <input [(ngModel)]="selected"
+       [typeahead]="states"
+       [typeaheadMinLength]="0"
+       (ngModelChange)="typeaheadNoResults($event)"
+       class="form-control">
+    <small id="emailHelp" class="form-text text-muted"> Create account only if it is not exist</small>
+  </div>
+  <div class="alert alert-danger" *ngIf="!noResult">Company Already Exist </div>
+  <button type="button" class="btn btn-primary" [disabled]="!noResult" [routerLink]="['/newaccount',selected]">Create Account</button>
+
+</div>
