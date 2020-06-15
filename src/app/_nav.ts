@@ -12,8 +12,8 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer'
   },
   {
-    name: 'Jobs',
-    url: '/jobs',
+    name: 'Audit',
+    url: '/audit',
     icon: 'icon-speedometer'
   },
   {
@@ -27,11 +27,6 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer'
   },
   {
-    name: 'Report',
-    url: '/report',
-    icon: 'icon-speedometer'
-  },
-  {
     name: 'RO',
     url: '/ro',
     icon: 'icon-speedometer'
@@ -39,6 +34,16 @@ export const navItems: INavData[] = [
   {
     name: 'Tax Return',
     url: '/taxreturn',
+    icon: 'icon-speedometer'
+  },
+  {
+    name: 'NAR1',
+    url: '/nar1',
+    icon: 'icon-speedometer'
+  },
+  {
+    name: 'Other CS',
+    url: '/othercs',
     icon: 'icon-speedometer'
   }
 ];

@@ -95,6 +95,18 @@ export const routes: Routes = [
         loadChildren: () => import('./views/newaccount/newaccount.module').then(m => m.NewaccountModule)
       },
       {
+        path: 'audit',
+        loadChildren: () => import('./views/audit/audit.module').then(m => m.AuditModule)
+      },
+      {
+        path: 'nar1',
+        loadChildren: () => import('./views/nar1/nar1.module').then(m => m.Nar1Module)
+      },
+      {
+        path: 'othercs',
+        loadChildren: () => import('./views/othercs/othercs.module').then(m => m.OthercsModule)
+      },
+      {
         path: 'icons',
         loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
       },
