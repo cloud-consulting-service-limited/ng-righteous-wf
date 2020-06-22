@@ -193,7 +193,14 @@ export class NewaccountCreateComponent implements OnInit {
     // generate random values for mainChart
     this.route.params.subscribe(params => {
        // this.id = +params['id']; // (+) converts string 'id' to a number
-       this.id = params['id']; 
+       let route = this.route.snapshot;
+
+       while (route.firstChild) {
+           route = route.firstChild;
+       }
+
+
+       this.id =  route.params['id'];
        console.log("id: "+this.id);
     });
   }

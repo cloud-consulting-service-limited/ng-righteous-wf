@@ -1,20 +1,45 @@
 <div class="animated fadeIn">
+<h1 class="display-3">New Account</h1>
 
-  <Label class="ad-label" textWrap="true">
-   {{id}}
-</Label>
+       <ngx-datatable
+         class="bootstrap fullscreen"
+         [headerHeight]="50"
+         [limit]="100"
+         [columnMode]="'force'"
+         [footerHeight]="50"
+         [rowHeight]="'auto'"
+         [rows]="tableRows"
+         [scrollbarH]="true">
+         <ngx-datatable-column *ngFor="let label of tableHeaders" [name]="label.name" [prop]="label.prop" [sortable]="true">
+           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                 {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Action" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <button  (click)='continue(rowIndex)'>Continue</button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
   <br>
   <br>
   <div class="form-group">
     <label for="exampleInputEmail1">Company Name</label>
+      <ng-template #customItemTemplate let-model="item" let-index="index">
+            <h5>{{model["Company Name"]}} </h5>
+            - [ {{model["Status"]}}  ]
+      </ng-template>
       <input [(ngModel)]="selected"
-       [typeahead]="states"
+       [typeahead]="tableRows"
+       typeaheadOptionField="Company Name"
        [typeaheadMinLength]="0"
        (ngModelChange)="typeaheadNoResults($event)"
+       [typeaheadItemTemplate]="customItemTemplate"
        class="form-control">
     <small id="emailHelp" class="form-text text-muted"> Create account only if it is not exist</small>
   </div>
   <div class="alert alert-danger" *ngIf="!noResult">Company Already Exist </div>
-  <button type="button" class="btn btn-primary" [disabled]="!noResult" [routerLink]="['/newaccount',selected]">Create Account</button>
+  <button type="button" class="btn btn-primary" [disabled]="!noResult" [routerLink]="['/newaccount','create',selected]" [hidden]="!selected || !noResult">Create Account</button>
+  <button type="button" class="btn btn-primary" [disabled]="noResult" (click)='continue(selectedIndex)' [hidden]="!selected || noResult">Contine Working on {{selected}}</button>
 
 </div>

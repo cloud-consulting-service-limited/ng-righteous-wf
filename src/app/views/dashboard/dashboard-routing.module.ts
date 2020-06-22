@@ -9,7 +9,41 @@ const routes: Routes = [
     component: DashboardComponent,
     data: {
       title: 'Dashboard'
-    }
+    },
+    children: [
+        {
+            path: 'list',
+            component: DashboardComponent,
+            data: {
+              title: 'List'
+            },
+            children: [
+                {
+                    path: ':id',
+                    component: DashboardComponent,
+                    data: {
+                      title: 'Get Detail by ID'
+                    }
+                }
+            ]
+        },
+        {
+            path: 'detail',
+            component: DashboardComponent,
+            data: {
+              title: 'Detail'
+            },
+            children: [
+                {
+                    path: ':id',
+                    component: DashboardComponent,
+                    data: {
+                      title: 'Create Details'
+                    }
+                }
+            ]
+        }
+    ]
   }
 ];
 

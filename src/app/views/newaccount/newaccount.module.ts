@@ -11,7 +11,12 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { NewaccountComponent } from './newaccount.component';
 import { NewaccountCreateComponent } from './newaccountCreate.component';
+import { NewaccountBasicComponent } from './newaccountBasic.component';
+import { NewaccountQuotationComponent } from './newaccountQuotation.component';
 import { NewaccountRoutingModule } from './newaccount-routing.module';
+
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+
 
 @NgModule({
   imports: [
@@ -21,10 +26,11 @@ import { NewaccountRoutingModule } from './newaccount-routing.module';
     CommonModule,
     ChartsModule,
     BsDropdownModule,
+    AccordionModule.forRoot(),
     TypeaheadModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot()
   ],
-  declarations: [ NewaccountComponent ,NewaccountCreateComponent]
+  declarations: [ NewaccountComponent ,NewaccountCreateComponent, NewaccountBasicComponent, NewaccountQuotationComponent]
 })
 export class NewaccountModule { }
