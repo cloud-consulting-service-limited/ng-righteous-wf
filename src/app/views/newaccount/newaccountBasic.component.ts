@@ -19,8 +19,8 @@ export class NewaccountBasicComponent implements OnInit {
 
   id: string;
   
-  accountInfo: Object={};
-  accountList: Object={};
+  accountInfo={};
+  accountList=[];
 
   next(): void {
       this.accountInfo['Status'] = '1. Quotation'; 

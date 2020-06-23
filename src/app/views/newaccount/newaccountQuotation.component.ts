@@ -18,13 +18,13 @@ export class NewaccountQuotationComponent implements OnInit {
 
   id: string;
   
-  quotation: Object={};
+  quotation={};
 
-  accountInfo: Object={};
-  accountList: Object={};
+  accountInfo={};
+  accountList=[];
   
-  discount: double=0;
-  deposit: double=0;
+  discount=0;
+  deposit=0;
 
   next(): void {
       this.quotation['discount'] = this.discount;

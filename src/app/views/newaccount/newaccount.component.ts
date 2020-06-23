@@ -18,7 +18,7 @@ export class NewaccountComponent implements OnInit {
   }
 
   selected: string;
-  accountList: Object();
+  accountList: any;
   selectedIndex: string;
   noResult = true;
   id: string;
@@ -81,7 +81,7 @@ export class NewaccountComponent implements OnInit {
          break;
       }
     }
-    if (foundindex >=0) this.selectedIndex = foundindex;
+    if (foundindex >=0) this.selectedIndex = foundindex.toString();
     this.noResult = (foundindex < 0 );
   }
 
