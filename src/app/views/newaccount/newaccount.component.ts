@@ -39,6 +39,9 @@ export class NewaccountComponent implements OnInit {
        route = "invoice"
        break;
      case '3':
+       route = "document"
+       break;
+     case '4':
        route = "detail"
        break;
      default:
@@ -67,7 +70,7 @@ export class NewaccountComponent implements OnInit {
     var stringAccountList = localStorage.getItem('accountList');
     this.accountList = JSON.parse(stringAccountList);
     if (!this.accountList) {
-        this.accountList = [ {"Company Name": "TCC Consulting Service Limited", "Status": "3. Enter account details"},  {"Company Name": "Cloud Consulting Service Limited", "Status": "2. Invoice"}];
+        this.accountList = [ {"Company Name": "TCC Consulting Service Limited", "Status": "3. Upload Documents"},  {"Company Name": "Cloud Consulting Service Limited", "Status": "2. Invoice"}];
     }
     this.tableRows=this.accountList;
 

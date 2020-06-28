@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
-<h1 class="display-3">Quotation</h1>
+<h1 class="display-3">Invoice</h1>
 <accordion>
-<accordion-group heading="Quotation History" [isOpen]="false" >
+<accordion-group heading="Invoice History" [isOpen]="false" >
        <ngx-datatable
          class="bootstrap "
          [headerHeight]="50"
@@ -10,7 +10,7 @@
          [columnMode]="'force'"
          [footerHeight]="30"
          [rowHeight]="'auto'"
-         [rows]="accountInfo['quotations']"
+         [rows]="accountInfo['invoices']"
          [scrollbarH]="true">
          <ngx-datatable-column name="#" [sortable]="false"  maxWidth="40">
            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
@@ -19,22 +19,22 @@
          </ngx-datatable-column>
          <ngx-datatable-column name="Sent Date and Time" [sortable]="false" >
            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-               <label class="form-control">{{accountInfo['quotations'][rowIndex]['sentDate'] | date: 'yyyy-MM-dd HH:mm:ss' }}</label>
+               <label class="form-control">{{accountInfo['invoices'][rowIndex]['sentDate'] | date: 'yyyy-MM-dd HH:mm:ss' }}</label>
            </ng-template>
          </ngx-datatable-column>
          <ngx-datatable-column name="Total" [sortable]="false">
            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-               <label class="form-control">HKD$ {{accountInfo['quotations'][rowIndex]['total']}}</label>
+               <label class="form-control">HKD$ {{accountInfo['invoices'][rowIndex]['total']}}</label>
            </ng-template>
          </ngx-datatable-column>
          <ngx-datatable-column name="Expiry Date" [sortable]="false"  >
            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-               <label class="form-control">{{accountInfo['quotations'][rowIndex]['Expiry Date'] | date: 'yyyy-MM-dd'}}</label>
+               <label class="form-control">{{accountInfo['invoices'][rowIndex]['Expiry Date'] | date: 'yyyy-MM-dd'}}</label>
            </ng-template>
          </ngx-datatable-column>
        </ngx-datatable>
 </accordion-group>
-<accordion-group [heading]="quotationContentHeader" [isOpen]="true">
+<accordion-group [heading]="invoiceContentHeader" [isOpen]="true">
 <div class="container">
   <div class="form-row">
     <div class="form-group col-md-3">
@@ -67,14 +67,14 @@
   <div class="form-row">
     <div class="form-group col-md-4">
       <div class="form-group">
-        <label for="inputAddress2">Quotation Date</label>
-        <input type="text" placeholder="" class="form-control" [(ngModel)]="quotation['Quotation Date']" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" bsDatepicker>
+        <label for="inputAddress2">Invoice Date</label>
+        <input type="text" placeholder="" class="form-control" [(ngModel)]="invoice['Invoice Date']" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" bsDatepicker>
       </div>
     </div>
     <div class="form-group col-md-4">
       <div class="form-group">
         <label for="inputAddress2">Expiry Date</label>
-        <input type="text" placeholder="" class="form-control" [(ngModel)]="quotation['Expiry Date']" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}"  bsDatepicker>
+        <input type="text" placeholder="" class="form-control" [(ngModel)]="invoice['Expiry Date']" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}"  bsDatepicker>
       </div>
     </div>
     <div class="form-group col-md-4">
@@ -197,19 +197,19 @@
   </div>
 
 
-  <button type="submit" class="btn btn-primary" (click)="next()" *ngIf="!this.quotation['sentDate']"> Save and Send Quotation</button>
-  <button type="submit" class="btn btn-primary" (click)="next()" *ngIf="this.quotation['sentDate']"> Resend modified Quotation</button>
-  <button type="submit" class="btn btn-primary" (click)="confirmQuotation()" *ngIf="this.quotation['sentDate']">Quotation Confirmed</button>
+  <button type="submit" class="btn btn-primary" (click)="next()" *ngIf="!this.invoice['sentDate']"> Save and Send Invoice</button>
+  <button type="submit" class="btn btn-primary" (click)="next()" *ngIf="this.invoice['sentDate']"> Resend modified Invoice</button>
+  <button type="submit" class="btn btn-primary" (click)="confirmInvoice()" *ngIf="this.invoice['sentDate']">Invoice Confirmed and Send document upload request</button>
 
-<ng-template #quotationSentMsgTemplate>
+<ng-template #invoiceSentMsgTemplate>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Quotation Sent</h4>
+    <h4 class="modal-title pull-left">Invoice Sent</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    Quotation Sent
+    Invoice Sent
   </div>
   <div class="modal-footer">
       <button type="button" class="btn btn-default" (click)="modalRef.hide()">OK</button>

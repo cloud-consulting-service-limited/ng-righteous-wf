@@ -11,21 +11,21 @@ import {TemplateRef} from '@angular/core';
 
 
 @Component({
-  templateUrl: 'newaccountQuotation.component.html'
+  templateUrl: 'newaccountDocument.component.html'
 })
-export class NewaccountQuotationComponent implements OnInit {
+export class NewaccountDocumentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private modalService: BsModalService,
     private router: Router,
   ) {
-    console.log("constructing NewaccountQuotationComponent")
+    console.log("constructing NewaccountDocumentComponent")
   }
   modalRef: BsModalRef;
   id: string;
   
-  @ViewChild('quotationSentMsgTemplate') templateref: TemplateRef<any>;  
-  quotation={};
+  @ViewChild('documentSentMsgTemplate') templateref: TemplateRef<any>;  
+  document={};
 
   accountInfo={};
   accountList=[];
@@ -33,28 +33,28 @@ export class NewaccountQuotationComponent implements OnInit {
   discount=0;
   deposit=0;
 
-  confirmQuotation(): void {
-      this.accountInfo['quotations'][0]['confirmed']=true;
-      this.accountInfo['quotations'][0]['confirmed date']= new Date();
-      this.accountInfo['Status'] = '2. Invoice';
-      for (var i=1; i< this.accountInfo['quotations'].length; i++ ) {
-          this.accountInfo['quotations'][i]['confirmed']=false;
+  confirmDocument(): void {
+      this.accountInfo['documents'][0]['confirmed']=true;
+      this.accountInfo['documents'][0]['confirmed date']= new Date();
+      this.accountInfo['Status'] = '2. Document';
+      for (var i=1; i< this.accountInfo['documents'].length; i++ ) {
+          this.accountInfo['documents'][i]['confirmed']=false;
       }
       localStorage.setItem('accountList', JSON.stringify(this.accountList));
-      this.router.navigate(['newaccount','invoice', this.id]);
+      this.router.navigate(['newaccount','document', this.id]);
   }
   next(): void {
-      this.quotation['discount'] = this.discount;
-      this.quotation['deposit'] = this.deposit;
-      this.quotation['lineItems'] = this.tableRows;
-      this.quotation['sentDate'] = new Date();
-      this.quotation['total'] = this.total;
-      var quotations = [];
-      if (this.accountInfo['quotations']) {
-         this.accountInfo['quotations'].unshift(this.quotation);
+      this.document['discount'] = this.discount;
+      this.document['deposit'] = this.deposit;
+      this.document['lineItems'] = this.tableRows;
+      this.document['sentDate'] = new Date();
+      this.document['total'] = this.total;
+      var documents = [];
+      if (this.accountInfo['documents']) {
+         this.accountInfo['documents'].unshift(this.document);
       } else {
-         quotations.push(this.quotation);
-         this.accountInfo['quotations'] = quotations;
+         documents.push(this.document);
+         this.accountInfo['documents'] = documents;
       }
       localStorage.setItem('accountList', JSON.stringify(this.accountList));
       this.modalRef = this.modalService.show(this.templateref);
@@ -75,12 +75,12 @@ export class NewaccountQuotationComponent implements OnInit {
     temp.splice(rowIndex, 1);
     this.tableRows = temp;
   };
-  get quotationContentHeader() {
+  get documentContentHeader() {
     var returnString="";
-    if ( this.quotation["sentDate"]) {
-       returnString = "Quotation Content - ( Sent on " + new Date(this.quotation["sentDate"]) +" )";
+    if ( this.document["sentDate"]) {
+       returnString = "Document Content - ( Sent on " + new Date(this.document["sentDate"]) +" )";
     } else {
-       returnString = "Quotation Content - New"
+       returnString = "Document Content - New"
     }
     return returnString;
   }
@@ -133,15 +133,17 @@ export class NewaccountQuotationComponent implements OnInit {
        var tmp = new Date();
        var now = new Date(tmp.getFullYear(), tmp.getMonth(), tmp.getDate());
        var exp = new Date(tmp.getFullYear(), tmp.getMonth()+1, tmp.getDate());
-       this.quotation["Quotation Date"] = now;
-       this.quotation["Expiry Date"] = exp;
-       if (this.accountInfo['quotations'] && this.accountInfo['quotations'][this.accountInfo['quotations'].length - 1]) {
-          this.quotation = this.accountInfo['quotations'][this.accountInfo['quotations'].length - 1];
-          this.tableRows = this.accountInfo['quotations'][this.accountInfo['quotations'].length - 1]['lineItems'];
-          this.discount = this.accountInfo['quotations'][this.accountInfo['quotations'].length - 1]['discount'];
-          this.deposit = this.accountInfo['quotations'][this.accountInfo['quotations'].length - 1]['deposit'];
-          this.quotation["Expiry Date"] = new Date(this.quotation["Expiry Date"]);
-          this.quotation["Quotation Date"] = new Date(this.quotation["Quotation Date"]);
+       this.document["Document Date"] = now;
+       this.document["Expiry Date"] = exp;
+       if (this.accountInfo['documents'] && this.accountInfo['documents'][this.accountInfo['documents'].length - 1]) {
+          this.document = this.accountInfo['documents'][this.accountInfo['documents'].length - 1];
+          this.tableRows = this.accountInfo['documents'][this.accountInfo['documents'].length - 1]['lineItems'];
+          this.discount = this.accountInfo['documents'][this.accountInfo['documents'].length - 1]['discount'];
+          this.deposit = this.accountInfo['documents'][this.accountInfo['documents'].length - 1]['deposit'];
+          this.document["Expiry Date"] = new Date(this.document["Expiry Date"]);
+          this.document["Document Date"] = new Date(this.document["Document Date"]);
+       } else {
+          this.tableRows = this.accountInfo['quotations'][0]['lineItems'];
        }
     });
 

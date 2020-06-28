@@ -5,6 +5,8 @@ import { NewaccountComponent } from './newaccount.component';
 import { NewaccountCreateComponent } from './newaccountCreate.component';
 import { NewaccountBasicComponent } from './newaccountBasic.component';
 import { NewaccountQuotationComponent } from './newaccountQuotation.component';
+import { NewaccountInvoiceComponent } from './newaccountInvoice.component';
+import { NewaccountDocumentComponent } from './newaccountDocument.component';
 
 const routes: Routes = [
   {
@@ -32,14 +34,14 @@ const routes: Routes = [
   },
   {
       path: 'invoice',
-      component: NewaccountComponent,
+      component: NewaccountInvoiceComponent,
       data: {
         title: 'Create Account / 2. Invoice'
       },
       children: [
           {
               path: ':id',
-              component: NewaccountComponent,
+              component: NewaccountInvoiceComponent,
               data: {
                 title: 'Create Account / 2. Invoice'
               }
@@ -63,10 +65,26 @@ const routes: Routes = [
       ]
   },
   {
+      path: 'document',
+      component: NewaccountDocumentComponent,
+      data: {
+        title: 'Create Account /  3. Document Upload'
+      },
+      children: [
+          {
+              path: ':id',
+              component: NewaccountDocumentComponent,
+              data: {
+                title: 'Create Account -> 3. Document Upload'
+              }
+          }
+      ]
+  },
+  {
       path: 'detail',
       component: NewaccountCreateComponent,
       data: {
-        title: 'Create Account -> 3. Enter account details'
+        title: 'Create Account -> 4. Enter account details'
       },
       children: [
           {

@@ -7,12 +7,14 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { CommonModule } from '@angular/common';  
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { NewaccountComponent } from './newaccount.component';
 import { NewaccountCreateComponent } from './newaccountCreate.component';
 import { NewaccountBasicComponent } from './newaccountBasic.component';
 import { NewaccountQuotationComponent } from './newaccountQuotation.component';
+import { NewaccountInvoiceComponent } from './newaccountInvoice.component';
+import { NewaccountDocumentComponent } from './newaccountDocument.component';
 import { NewaccountRoutingModule } from './newaccount-routing.module';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -28,9 +30,10 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     BsDropdownModule,
     AccordionModule.forRoot(),
     TypeaheadModule.forRoot(),
+    ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot()
   ],
-  declarations: [ NewaccountComponent ,NewaccountCreateComponent, NewaccountBasicComponent, NewaccountQuotationComponent]
+  declarations: [ NewaccountComponent ,NewaccountCreateComponent, NewaccountBasicComponent, NewaccountQuotationComponent,NewaccountInvoiceComponent, NewaccountDocumentComponent]
 })
 export class NewaccountModule { }
