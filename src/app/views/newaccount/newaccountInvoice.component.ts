@@ -36,12 +36,12 @@ export class NewaccountInvoiceComponent implements OnInit {
   confirmInvoice(): void {
       this.accountInfo['invoices'][0]['confirmed']=true;
       this.accountInfo['invoices'][0]['confirmed date']= new Date();
-      this.accountInfo['Status'] = '2. Invoice';
+      this.accountInfo['Status'] = '3. Document Upload';
       for (var i=1; i< this.accountInfo['invoices'].length; i++ ) {
           this.accountInfo['invoices'][i]['confirmed']=false;
       }
       localStorage.setItem('accountList', JSON.stringify(this.accountList));
-      this.router.navigate(['newaccount','invoice', this.id]);
+      this.router.navigate(['newaccount','document', this.id]);
   }
   next(): void {
       this.invoice['discount'] = this.discount;
@@ -135,11 +135,11 @@ export class NewaccountInvoiceComponent implements OnInit {
        var exp = new Date(tmp.getFullYear(), tmp.getMonth()+1, tmp.getDate());
        this.invoice["Invoice Date"] = now;
        this.invoice["Expiry Date"] = exp;
-       if (this.accountInfo['invoices'] && this.accountInfo['invoices'][this.accountInfo['invoices'].length - 1]) {
-          this.invoice = this.accountInfo['invoices'][this.accountInfo['invoices'].length - 1];
-          this.tableRows = this.accountInfo['invoices'][this.accountInfo['invoices'].length - 1]['lineItems'];
-          this.discount = this.accountInfo['invoices'][this.accountInfo['invoices'].length - 1]['discount'];
-          this.deposit = this.accountInfo['invoices'][this.accountInfo['invoices'].length - 1]['deposit'];
+       if (this.accountInfo['invoices'] && this.accountInfo['invoices'][0]) {
+          this.invoice = this.accountInfo['invoices'][0];
+          this.tableRows = this.accountInfo['invoices'][0]['lineItems'];
+          this.discount = this.accountInfo['invoices'][0]['discount'];
+          this.deposit = this.accountInfo['invoices'][0]['deposit'];
           this.invoice["Expiry Date"] = new Date(this.invoice["Expiry Date"]);
           this.invoice["Invoice Date"] = new Date(this.invoice["Invoice Date"]);
        } else {

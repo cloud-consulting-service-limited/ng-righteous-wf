@@ -135,11 +135,11 @@ export class NewaccountQuotationComponent implements OnInit {
        var exp = new Date(tmp.getFullYear(), tmp.getMonth()+1, tmp.getDate());
        this.quotation["Quotation Date"] = now;
        this.quotation["Expiry Date"] = exp;
-       if (this.accountInfo['quotations'] && this.accountInfo['quotations'][this.accountInfo['quotations'].length - 1]) {
-          this.quotation = this.accountInfo['quotations'][this.accountInfo['quotations'].length - 1];
-          this.tableRows = this.accountInfo['quotations'][this.accountInfo['quotations'].length - 1]['lineItems'];
-          this.discount = this.accountInfo['quotations'][this.accountInfo['quotations'].length - 1]['discount'];
-          this.deposit = this.accountInfo['quotations'][this.accountInfo['quotations'].length - 1]['deposit'];
+       if (this.accountInfo['quotations'] && this.accountInfo['quotations'][0]) {
+          this.quotation = this.accountInfo['quotations'][0];
+          this.tableRows = this.accountInfo['quotations'][0]['lineItems'];
+          this.discount = this.accountInfo['quotations'][0]['discount'];
+          this.deposit = this.accountInfo['quotations'][0]['deposit'];
           this.quotation["Expiry Date"] = new Date(this.quotation["Expiry Date"]);
           this.quotation["Quotation Date"] = new Date(this.quotation["Quotation Date"]);
        }

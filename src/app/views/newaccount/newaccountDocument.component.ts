@@ -44,11 +44,15 @@ export class NewaccountDocumentComponent implements OnInit {
       this.router.navigate(['newaccount','document', this.id]);
   }
   next(): void {
-      this.document['discount'] = this.discount;
-      this.document['deposit'] = this.deposit;
-      this.document['lineItems'] = this.tableRows;
+      this.document['documentRequestList'] = this.documentRequestList;
+      var cnt = 0;
+      for (var i=0; i< this.documentRequestList.length; i++) {
+          if (this.documentRequestList[i]['Asked']) {
+	      cnt ++;
+	  }
+      }
       this.document['sentDate'] = new Date();
-      this.document['total'] = this.total;
+      this.document['documentAskedCount'] = cnt;
       var documents = [];
       if (this.accountInfo['documents']) {
          this.accountInfo['documents'].unshift(this.document);
@@ -62,45 +66,32 @@ export class NewaccountDocumentComponent implements OnInit {
 
 
 
-  tableRows = [];
-  lineOptions = ["Audit","Tax Filing","Tax Service","NAR1","Act as Co Sec", "RO Service","Disbursement","BR Fee","Incorporation","Share Transfer","Deregistration","Rental"];
-  add() {
-    let temp = [...this.tableRows];
-    temp.push({"Product":"Audit","Description":"","Amount":"0"});
-    console.log(JSON.stringify(temp));
-    this.tableRows = temp;
-  }
-  deleteRow(rowIndex) {
-    let temp = [...this.tableRows];
-    temp.splice(rowIndex, 1);
-    this.tableRows = temp;
-  };
+  documentRequestList = [
+   { "Chinese": "業務性質", "English":"Principal Activities", "Asked": false, "Uploaded": false, "Checked": false} ,
+   { "Chinese": "年結日", "English":"Proposed first year end", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "最近一年審計報告", "English":"Last year audit report", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "最近一年稅計算表", "English":"Last year tax computation", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "最近一年報稅表", "English":"Last year profits tax return", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "所有銀行月結單", "English":"All bank statements for the audit period", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "簽回附件的銀行詢証函", "English":"Sign and return back the bank confirmation", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "簽回附件的稅務代表委任書", "English":"Sign and return back the appointmnet letter of tax rep", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "簽回附件的核數師委任書", "English":"Sign and return back the engagement letters", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "所有董事及股東的身份證", "English":"Please provide the HKID of all directors & shareholders", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "請提供商業登記證", "English":"Please provide the BR of the Company", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "收支表，資產負債表，明細表", "English":"Current year profit and loss and balance sheet, and ledger", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "僱主填報的薪酬及退休金報稅表", "English":"All Employers' return (56B form)", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "租約", "English":"Tenancy agreement", "Asked": false, "Uploaded": false, "Checked": false},
+   { "Chinese": "請提供以下文件", "English":"Statutory documents as per attachment", "Asked": false, "Uploaded": false, "Checked": false}
+   ];
   get documentContentHeader() {
     var returnString="";
     if ( this.document["sentDate"]) {
-       returnString = "Document Content - ( Sent on " + new Date(this.document["sentDate"]) +" )";
+       returnString = "Document Upload Request - ( Sent on " + new Date(this.document["sentDate"]) +" )";
     } else {
-       returnString = "Document Content - New"
+       returnString = "Document Upload Request - New"
     }
     return returnString;
   }
-  get total() {
-     var total = 0;
-     total = this.subTotal- this.discount;
-     return total;
-  };
-  get balanceDue() {
-     var balanceDue = 0;
-     balanceDue = this.total- this.deposit;
-     return balanceDue;
-  };
-  get subTotal() {
-     var sum=0;
-     for (var i=0; i< this.tableRows.length; i++) {
-        sum += this.tableRows[i]['Amount'];
-     }
-     return sum;
-  };
 
   ngOnInit(): void {
     // generate random values for mainChart
@@ -130,21 +121,10 @@ export class NewaccountDocumentComponent implements OnInit {
        if (foundindex < 0 ) return;
        this.accountInfo = this.accountList[foundindex];
        this.accountInfo['Display Name'] = this.accountInfo["First Name"] + " " + this.accountInfo["Last Name"];
-       var tmp = new Date();
-       var now = new Date(tmp.getFullYear(), tmp.getMonth(), tmp.getDate());
-       var exp = new Date(tmp.getFullYear(), tmp.getMonth()+1, tmp.getDate());
-       this.document["Document Date"] = now;
-       this.document["Expiry Date"] = exp;
        if (this.accountInfo['documents'] && this.accountInfo['documents'][this.accountInfo['documents'].length - 1]) {
-          this.document = this.accountInfo['documents'][this.accountInfo['documents'].length - 1];
-          this.tableRows = this.accountInfo['documents'][this.accountInfo['documents'].length - 1]['lineItems'];
-          this.discount = this.accountInfo['documents'][this.accountInfo['documents'].length - 1]['discount'];
-          this.deposit = this.accountInfo['documents'][this.accountInfo['documents'].length - 1]['deposit'];
-          this.document["Expiry Date"] = new Date(this.document["Expiry Date"]);
-          this.document["Document Date"] = new Date(this.document["Document Date"]);
-       } else {
-          this.tableRows = this.accountInfo['quotations'][0]['lineItems'];
-       }
+          this.document = this.accountInfo['documents'][0];
+	  this.documentRequestList = this.accountInfo['documents'][0].documentRequestList;
+       } 
     });
 
   }
