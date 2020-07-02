@@ -41,6 +41,7 @@ export class NewaccountCreateComponent implements OnInit {
   editingShareHolder ={}
   editingAmoutdueCo ={}
   editingAmoutdueSub ={}
+  accountDetail = {}
 
   constructor(
     private route: ActivatedRoute,
@@ -202,6 +203,24 @@ export class NewaccountCreateComponent implements OnInit {
 
        this.id =  route.params['id'];
        console.log("id: "+this.id);
+       var stringInput = localStorage.getItem('accountList');
+       this.accountList = JSON.parse(stringInput);
+       if (!this.accountList) {
+           return;
+       }
+
+       var foundindex=0;
+       for (var i=0; i < this.accountList.length; i ++) {
+           if (this.accountList[i]['Company Name'] === this.id){
+               foundindex = i;
+               break;
+           }
+       }
+       if (foundindex < 0 ) return;
+       this.accountInfo = this.accountList[foundindex];
+       if (this.accountInfo['detail']) {
+           this.accountDetail = this.accountInfo['detail'];
+       }
     });
   }
 

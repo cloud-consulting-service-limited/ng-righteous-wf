@@ -9,42 +9,43 @@
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Change of name</span>
+    <span class="input-group-text" id="change-of-name">Change of name</span>
   </div>
-  <input type="text" class="form-control" placeholder="Change of name" aria-label="Username" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" placeholder="Change of name" aria-label="Change of Name" aria-describedby="Change of name" [(ngModel)]="accountDetail['change-of-name']" >
 </div>
 
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Older name</span>
+    <span class="input-group-text" id="older-name">Older name</span>
   </div>
-  <input type="text" class="form-control" placeholder="Older Name" aria-label="Username" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" placeholder="Older Name" aria-label="Older name" aria-describedby="Older name" [(ngModel)]="accountDetail['older-name']">
 </div>
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Date of name change(i.e. 15 Mar 2019)</span>
+    <span class="input-group-text" id="date-of-name-change">Date of name change(i.e. 15 Mar 2019)</span>
   </div>
     <input type="text"
            placeholder=""
            class="form-control"
+           [(ngModel)]="accountDetail['date-of-name-change']"
            bsDatepicker>
 </div>
 
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Limited by shares or guarantee</span>
+    <span class="input-group-text" id="limited-by-shares-or-guarantee">Limited by shares or guarantee</span>
   </div>
-  <input type="text" class="form-control" placeholder="Limited by shares or guarantee" aria-label="Username" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" placeholder="Limited by shares or guarantee" aria-label="Limited by shares or guarantee" aria-describedby="Limited by shares or guarantee" [(ngModel)]="accountDetail['limited-by-shares-or-gurantee']">
 </div>
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Financial reporting</span>
+    <span class="input-group-text" id="financial-reporting">Financial reporting</span>
   </div>
-  <input type="text" class="form-control" placeholder="Financial reporting" aria-label="Username" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" placeholder="Financial reporting" aria-label="Financial reporting" aria-describedby="Financial reporting" [(ngModel)]="accountDetail['financial-reporting']">
 </div>
 
 <label for="basic-url">Directors</label>
@@ -107,9 +108,9 @@
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Principal activities</span>
+    <span class="input-group-text" id="principal-activities">Principal activities</span>
   </div>
-  <input type="text" class="form-control" placeholder="Principal activities" aria-label="Username" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" placeholder="Principal activities" aria-label="Principal activities" aria-describedby="Principal activities" [(ngModel)]="accountDetail['financial-activities']>
 </div>
 
 <div class="input-group mb-3" >
@@ -538,7 +539,7 @@
       </ngx-datatable>
 
 
-<button type="button" class="btn btn-primary btn-lg float-right">Create</button>
+<button type="button" class="btn btn-primary btn-lg float-right">Create and Finish</button>
 <br/>
 
 <label ></label>

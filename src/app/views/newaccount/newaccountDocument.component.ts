@@ -36,12 +36,12 @@ export class NewaccountDocumentComponent implements OnInit {
   confirmDocument(): void {
       this.accountInfo['documents'][0]['confirmed']=true;
       this.accountInfo['documents'][0]['confirmed date']= new Date();
-      this.accountInfo['Status'] = '2. Document';
+      this.accountInfo['Status'] = '4. Enter Account Details';
       for (var i=1; i< this.accountInfo['documents'].length; i++ ) {
           this.accountInfo['documents'][i]['confirmed']=false;
       }
       localStorage.setItem('accountList', JSON.stringify(this.accountList));
-      this.router.navigate(['newaccount','document', this.id]);
+      this.router.navigate(['newaccount','detail', this.id]);
   }
   next(): void {
       this.document['documentRequestList'] = this.documentRequestList;
