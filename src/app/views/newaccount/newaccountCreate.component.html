@@ -223,12 +223,13 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="any-immediate-co">Any immediate co</span>
     </div>
-    <input type="text" class="form-control" placeholder="" aria-label="Any immediate co" aria-describedby="Any immediate co" [(ngModel)]="asccountDetail['any-immediate-co']/>
+    <input type="text" class="form-control" placeholder="" aria-label="Any immediate co"
+      aria-describedby="Any immediate co" [(ngModel)]="asccountDetail['any-immediate-co']/>
   </div>
 
   <label>Sub</label>
-  <ngx-datatable class="bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
-    [footerHeight]="50" [rowHeight]="'auto'" [rows]="tableRowsSub" [scrollbarH]="true">
+  <ngx-datatable class=" bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
+      [footerHeight]="50" [rowHeight]="'auto'" [rows]="tableRowsSub" [scrollbarH]="true">
     <ngx-datatable-column *ngFor="let label of tableHeadersSub" [name]="label.name" [prop]="label.prop"
       [sortable]="false">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
@@ -258,154 +259,155 @@
         </div>
       </ng-template>
     </ngx-datatable-footer>
-  </ngx-datatable>
+    </ngx-datatable>
 
-  <label>Asso</label>
-  <ngx-datatable class="bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
-    [footerHeight]="50" [rowHeight]="'auto'" [rows]="tableRowsAsso" [scrollbarH]="true">
-    <ngx-datatable-column *ngFor="let label of tableHeadersAsso" [name]="label.name" [prop]="label.prop"
-      [sortable]="false">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <span title="double Click here " (dblclick)="editCellAsso(label.prop, rowIndex)"
-          *ngIf="!editingAsso[rowIndex + '-' + label.prop]" class="container-fluid">
-          {{ value }}
-        </span>
-        <input autofocus (blur)="updateValue($event, label.prop, rowIndex)"
-          (keyup.enter)="updateValueAsso($event, label.prop, rowIndex)" *ngIf="editingAsso[rowIndex + '-' + label.prop]"
-          [type]="label.inputType" class="form-control" [value]="value" />
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Action" [sortable]="false">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <button (click)="deleteRowAsso(rowIndex)">remove</button>
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-footer>
-      <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
-        let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
-        <div class="page-count">
-          <span *ngIf="selectedMessage">
-            {{ selectedCount.toLocaleString() }} {{ selectedMessage }} /
+    <label>Asso</label>
+    <ngx-datatable class="bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
+      [footerHeight]="50" [rowHeight]="'auto'" [rows]="tableRowsAsso" [scrollbarH]="true">
+      <ngx-datatable-column *ngFor="let label of tableHeadersAsso" [name]="label.name" [prop]="label.prop"
+        [sortable]="false">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <span title="double Click here " (dblclick)="editCellAsso(label.prop, rowIndex)"
+            *ngIf="!editingAsso[rowIndex + '-' + label.prop]" class="container-fluid">
+            {{ value }}
           </span>
-          {{ rowCount.toLocaleString() }} {{ totalMessage }}
-          <a href="javascript:void(0)" (click)="addAsso()" class="float-right">Add a new column</a>
-        </div>
-      </ng-template>
-    </ngx-datatable-footer>
-  </ngx-datatable>
+          <input autofocus (blur)="updateValue($event, label.prop, rowIndex)"
+            (keyup.enter)="updateValueAsso($event, label.prop, rowIndex)"
+            *ngIf="editingAsso[rowIndex + '-' + label.prop]" [type]="label.inputType" class="form-control"
+            [value]="value" />
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Action" [sortable]="false">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <button (click)="deleteRowAsso(rowIndex)">remove</button>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-footer>
+        <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
+          let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
+          <div class="page-count">
+            <span *ngIf="selectedMessage">
+              {{ selectedCount.toLocaleString() }} {{ selectedMessage }} /
+            </span>
+            {{ rowCount.toLocaleString() }} {{ totalMessage }}
+            <a href="javascript:void(0)" (click)="addAsso()" class="float-right">Add a new column</a>
+          </div>
+        </ng-template>
+      </ngx-datatable-footer>
+    </ngx-datatable>
 
-  <label>Shareholders</label>
+    <label>Shareholders</label>
 
-  <ngx-datatable class="bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
-    [footerHeight]="50" [rowHeight]="'auto'" [rows]="tableRowsShareHolder" [scrollbarH]="true">
-    <ngx-datatable-column *ngFor="let label of tableHeadersShareHolder" [name]="label.name" [prop]="label.prop"
-      [sortable]="false">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <span title="double Click here " (dblclick)="editCellShareHolder(label.prop, rowIndex)"
-          *ngIf="!editingShareHolder[rowIndex + '-' + label.prop]" class="container-fluid">
-          {{ value }}
-        </span>
-        <input autofocus (blur)="updateValue($event, label.prop, rowIndex)"
-          (keyup.enter)="updateValueShareHolder($event, label.prop, rowIndex)"
-          *ngIf="editingShareHolder[rowIndex + '-' + label.prop]" [type]="label.inputType" class="form-control"
-          [value]="value" />
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Action" [sortable]="false">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <button (click)="deleteRowShareHolder(rowIndex)">remove</button>
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-footer>
-      <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
-        let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
-        <div class="page-count">
-          <span *ngIf="selectedMessage">
-            {{ selectedCount.toLocaleString() }} {{ selectedMessage }} /
+    <ngx-datatable class="bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
+      [footerHeight]="50" [rowHeight]="'auto'" [rows]="tableRowsShareHolder" [scrollbarH]="true">
+      <ngx-datatable-column *ngFor="let label of tableHeadersShareHolder" [name]="label.name" [prop]="label.prop"
+        [sortable]="false">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <span title="double Click here " (dblclick)="editCellShareHolder(label.prop, rowIndex)"
+            *ngIf="!editingShareHolder[rowIndex + '-' + label.prop]" class="container-fluid">
+            {{ value }}
           </span>
-          {{ rowCount.toLocaleString() }} {{ totalMessage }}
-          <a href="javascript:void(0)" (click)="addShareHolder()" class="float-right">Add a new column</a>
-        </div>
-      </ng-template>
-    </ngx-datatable-footer>
-  </ngx-datatable>
+          <input autofocus (blur)="updateValue($event, label.prop, rowIndex)"
+            (keyup.enter)="updateValueShareHolder($event, label.prop, rowIndex)"
+            *ngIf="editingShareHolder[rowIndex + '-' + label.prop]" [type]="label.inputType" class="form-control"
+            [value]="value" />
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Action" [sortable]="false">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <button (click)="deleteRowShareHolder(rowIndex)">remove</button>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-footer>
+        <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
+          let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
+          <div class="page-count">
+            <span *ngIf="selectedMessage">
+              {{ selectedCount.toLocaleString() }} {{ selectedMessage }} /
+            </span>
+            {{ rowCount.toLocaleString() }} {{ totalMessage }}
+            <a href="javascript:void(0)" (click)="addShareHolder()" class="float-right">Add a new column</a>
+          </div>
+        </ng-template>
+      </ngx-datatable-footer>
+    </ngx-datatable>
 
-  <label>Amount due from (to) related companies</label>
+    <label>Amount due from (to) related companies</label>
 
-  <ngx-datatable class="bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
-    [footerHeight]="50" [rowHeight]="'auto'" [rows]="tableRowsAmountdueCo" [scrollbarH]="true">
-    <ngx-datatable-column *ngFor="let label of tableHeadersAmountdueCo" [name]="label.name" [prop]="label.prop"
-      [sortable]="false">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <span title="double Click here " (dblclick)="editCellAmountdueCo(label.prop, rowIndex)"
-          *ngIf="!editingAmountdueCo[rowIndex + '-' + label.prop]" class="container-fluid">
-          {{ value }}
-        </span>
-        <input autofocus (blur)="updateValue($event, label.prop, rowIndex)"
-          (keyup.enter)="updateValueAmountdueCo($event, label.prop, rowIndex)"
-          *ngIf="editingAmountdueCo[rowIndex + '-' + label.prop]" [type]="label.inputType" class="form-control"
-          [value]="value" />
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Action" [sortable]="false">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <button (click)="deleteRowAmountdueCo(rowIndex)">remove</button>
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-footer>
-      <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
-        let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
-        <div class="page-count">
-          <span *ngIf="selectedMessage">
-            {{ selectedCount.toLocaleString() }} {{ selectedMessage }} /
+    <ngx-datatable class="bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
+      [footerHeight]="50" [rowHeight]="'auto'" [rows]="tableRowsAmountdueCo" [scrollbarH]="true">
+      <ngx-datatable-column *ngFor="let label of tableHeadersAmountdueCo" [name]="label.name" [prop]="label.prop"
+        [sortable]="false">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <span title="double Click here " (dblclick)="editCellAmountdueCo(label.prop, rowIndex)"
+            *ngIf="!editingAmountdueCo[rowIndex + '-' + label.prop]" class="container-fluid">
+            {{ value }}
           </span>
-          {{ rowCount.toLocaleString() }} {{ totalMessage }}
-          <a href="javascript:void(0)" (click)="addAmountdueCo()" class="float-right">Add a new column</a>
-        </div>
-      </ng-template>
-    </ngx-datatable-footer>
-  </ngx-datatable>
+          <input autofocus (blur)="updateValue($event, label.prop, rowIndex)"
+            (keyup.enter)="updateValueAmountdueCo($event, label.prop, rowIndex)"
+            *ngIf="editingAmountdueCo[rowIndex + '-' + label.prop]" [type]="label.inputType" class="form-control"
+            [value]="value" />
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Action" [sortable]="false">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <button (click)="deleteRowAmountdueCo(rowIndex)">remove</button>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-footer>
+        <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
+          let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
+          <div class="page-count">
+            <span *ngIf="selectedMessage">
+              {{ selectedCount.toLocaleString() }} {{ selectedMessage }} /
+            </span>
+            {{ rowCount.toLocaleString() }} {{ totalMessage }}
+            <a href="javascript:void(0)" (click)="addAmountdueCo()" class="float-right">Add a new column</a>
+          </div>
+        </ng-template>
+      </ngx-datatable-footer>
+    </ngx-datatable>
 
-  <label>Amount due from (to) fellow subsidiaries</label>
+    <label>Amount due from (to) fellow subsidiaries</label>
 
-  <ngx-datatable class="bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
-    [footerHeight]="50" [rowHeight]="'auto'" [rows]="tableRowsAmountdueSub" [scrollbarH]="true">
-    <ngx-datatable-column *ngFor="let label of tableHeadersAmountdueSub" [name]="label.name" [prop]="label.prop"
-      [sortable]="false">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <span title="double Click here " (dblclick)="editCellAmountdueSub(label.prop, rowIndex)"
-          *ngIf="!editingAmountdueSub[rowIndex + '-' + label.prop]" class="container-fluid">
-          {{ value }}
-        </span>
-        <input autofocus (blur)="updateValue($event, label.prop, rowIndex)"
-          (keyup.enter)="updateValueAmountdueSub($event, label.prop, rowIndex)"
-          *ngIf="editingAmountdueSub[rowIndex + '-' + label.prop]" [type]="label.inputType" class="form-control"
-          [value]="value" />
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Action" [sortable]="false">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <button (click)="deleteRowAmountdueSub(rowIndex)">remove</button>
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-footer>
-      <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
-        let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
-        <div class="page-count">
-          <span *ngIf="selectedMessage">
-            {{ selectedCount.toLocaleString() }} {{ selectedMessage }} /
+    <ngx-datatable class="bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
+      [footerHeight]="50" [rowHeight]="'auto'" [rows]="tableRowsAmountdueSub" [scrollbarH]="true">
+      <ngx-datatable-column *ngFor="let label of tableHeadersAmountdueSub" [name]="label.name" [prop]="label.prop"
+        [sortable]="false">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <span title="double Click here " (dblclick)="editCellAmountdueSub(label.prop, rowIndex)"
+            *ngIf="!editingAmountdueSub[rowIndex + '-' + label.prop]" class="container-fluid">
+            {{ value }}
           </span>
-          {{ rowCount.toLocaleString() }} {{ totalMessage }}
-          <a href="javascript:void(0)" (click)="addAmountdueSub()" class="float-right">Add a new column</a>
-        </div>
-      </ng-template>
-    </ngx-datatable-footer>
-  </ngx-datatable>
+          <input autofocus (blur)="updateValue($event, label.prop, rowIndex)"
+            (keyup.enter)="updateValueAmountdueSub($event, label.prop, rowIndex)"
+            *ngIf="editingAmountdueSub[rowIndex + '-' + label.prop]" [type]="label.inputType" class="form-control"
+            [value]="value" />
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Action" [sortable]="false">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <button (click)="deleteRowAmountdueSub(rowIndex)">remove</button>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-footer>
+        <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
+          let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
+          <div class="page-count">
+            <span *ngIf="selectedMessage">
+              {{ selectedCount.toLocaleString() }} {{ selectedMessage }} /
+            </span>
+            {{ rowCount.toLocaleString() }} {{ totalMessage }}
+            <a href="javascript:void(0)" (click)="addAmountdueSub()" class="float-right">Add a new column</a>
+          </div>
+        </ng-template>
+      </ngx-datatable-footer>
+    </ngx-datatable>
 
-  <button type="button" class="btn btn-primary btn-lg float-right" (click)="save()">
-    Save and Finish
-  </button>
-  <br />
+    <button type="button" class="btn btn-primary btn-lg float-right" (click)="save()">
+      Save and Finish
+    </button>
+    <br />
 
-  <label></label>
-</div>
+    <label></label>
+  </div>

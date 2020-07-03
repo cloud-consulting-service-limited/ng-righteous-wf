@@ -23,13 +23,13 @@ export class NewaccountDocumentComponent implements OnInit {
   }
   modalRef: BsModalRef;
   id: string;
-  
-  @ViewChild('documentSentMsgTemplate') templateref: TemplateRef<any>;  
+
+  @ViewChild('documentSentMsgTemplate') templateref: TemplateRef<any>;
   document={};
 
   accountInfo={};
   accountList=[];
-  
+
   discount=0;
   deposit=0;
 
@@ -62,7 +62,7 @@ export class NewaccountDocumentComponent implements OnInit {
       }
       localStorage.setItem('accountList', JSON.stringify(this.accountList));
       this.modalRef = this.modalService.show(this.templateref);
-  }   
+  }
 
 
 
@@ -110,7 +110,7 @@ export class NewaccountDocumentComponent implements OnInit {
        if (!this.accountList) {
            return;
        }
-       
+
        var foundindex=0;
        for (var i=0; i < this.accountList.length; i ++) {
            if (this.accountList[i]['Company Name'] === this.id){
@@ -124,7 +124,7 @@ export class NewaccountDocumentComponent implements OnInit {
        if (this.accountInfo['documents'] && this.accountInfo['documents'][this.accountInfo['documents'].length - 1]) {
           this.document = this.accountInfo['documents'][0];
 	  this.documentRequestList = this.accountInfo['documents'][0].documentRequestList;
-       } 
+       }
     });
 
   }

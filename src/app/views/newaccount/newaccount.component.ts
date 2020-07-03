@@ -19,14 +19,14 @@ export class NewaccountComponent implements OnInit {
 
   selected: string;
   accountList: any;
-  selectedIndex: string;
+  selectedIndex: string;s
   noResult = true;
   id: string;
-   
+
   tableRows = [ {"Company Name": "TCC Consulting Service Limited", "Status": "3. Enter account details"},  {"Company Name": "Cloud Consulting Service Limited", "Status": "2. Invoice"}]
 
   tableHeaders = [{"name":"Company Name","prop":"Company Name"}, {"name":"Status","prop":"Status"} ];
- 
+
   continue(rowIndex): void {
     var account = this.tableRows[rowIndex];
     var status = account['Status'].charAt(0);

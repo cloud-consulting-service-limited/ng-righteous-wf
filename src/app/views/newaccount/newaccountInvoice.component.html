@@ -1,222 +1,221 @@
 <div class="animated fadeIn">
-<h1 class="display-3">Invoice</h1>
-<accordion>
-<accordion-group heading="Invoice History" [isOpen]="false" >
-       <ngx-datatable
-         class="bootstrap "
-         [headerHeight]="50"
-         [limit]="3"
-         [messages]="{emptyMessage:''}"
-         [columnMode]="'force'"
-         [footerHeight]="30"
-         [rowHeight]="'auto'"
-         [rows]="accountInfo['invoices']"
-         [scrollbarH]="true">
-         <ngx-datatable-column name="#" [sortable]="false"  maxWidth="40">
-           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-               <label >{{rowIndex+1}}</label>
-           </ng-template>
-         </ngx-datatable-column>
-         <ngx-datatable-column name="Sent Date and Time" [sortable]="false" >
-           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-               <label class="form-control">{{accountInfo['invoices'][rowIndex]['sentDate'] | date: 'yyyy-MM-dd HH:mm:ss' }}</label>
-           </ng-template>
-         </ngx-datatable-column>
-         <ngx-datatable-column name="Total" [sortable]="false">
-           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-               <label class="form-control">HKD$ {{accountInfo['invoices'][rowIndex]['total']}}</label>
-           </ng-template>
-         </ngx-datatable-column>
-         <ngx-datatable-column name="Expiry Date" [sortable]="false"  >
-           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-               <label class="form-control">{{accountInfo['invoices'][rowIndex]['Expiry Date'] | date: 'yyyy-MM-dd'}}</label>
-           </ng-template>
-         </ngx-datatable-column>
-       </ngx-datatable>
-</accordion-group>
-<accordion-group [heading]="invoiceContentHeader" [isOpen]="true">
-<div class="container">
-  <div class="form-row">
-    <div class="form-group col-md-3">
-      <label for="inputCompany">Company Name :</label>
-    </div>
-    <div class="form-group col-md-9">
-      <input type="text" class="form-control" id="inputCompany" placeholder="" [(ngModel)]="accountInfo['Company Name']" readonly>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-3">
-      <label for="inputAddress">Email :</label>
-    </div>
-    <div class="form-group col-md-9">
-      <input type="email" class="form-control" id="inputAddress2" placeholder="" [(ngModel)]="accountInfo['Email']" readonly>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-3">
-      <label for="inputEmail4">Name: </label>
-    </div>
-    <div class="form-group col-md-9">
-      <input type="email" class="form-control" id="inputAddress2" placeholder="" [(ngModel)]="accountInfo['Display Name']" readonly>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputAddress2">Address</label>
-    <textarea class="form-control" aria-label="With textarea" [(ngModel)]="accountInfo['Address']" readonly rows="6" ></textarea>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-4">
-      <div class="form-group">
-        <label for="inputAddress2">Invoice Date</label>
-        <input type="text" placeholder="" class="form-control" [(ngModel)]="invoice['Invoice Date']" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" bsDatepicker>
+  <h1 class="display-3">Invoice</h1>
+  <accordion>
+    <accordion-group heading="Invoice History" [isOpen]="false">
+      <ngx-datatable class="bootstrap " [headerHeight]="50" [limit]="3" [messages]="{emptyMessage:''}"
+        [columnMode]="'force'" [footerHeight]="30" [rowHeight]="'auto'" [rows]="accountInfo['invoices']"
+        [scrollbarH]="true">
+        <ngx-datatable-column name="#" [sortable]="false" maxWidth="40">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label>{{rowIndex+1}}</label>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Sent Date and Time" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label
+              class="form-control">{{accountInfo['invoices'][rowIndex]['sentDate'] | date: 'yyyy-MM-dd HH:mm:ss' }}</label>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Total" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label class="form-control">HKD$ {{accountInfo['invoices'][rowIndex]['total']}}</label>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Expiry Date" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label
+              class="form-control">{{accountInfo['invoices'][rowIndex]['Expiry Date'] | date: 'yyyy-MM-dd'}}</label>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </accordion-group>
+    <accordion-group [heading]="invoiceContentHeader" [isOpen]="true">
+      <div class="container">
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="inputCompany">Company Name :</label>
+          </div>
+          <div class="form-group col-md-9">
+            <input type="text" class="form-control" id="inputCompany" placeholder=""
+              [(ngModel)]="accountInfo['Company Name']" readonly>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="inputAddress">Email :</label>
+          </div>
+          <div class="form-group col-md-9">
+            <input type="email" class="form-control" id="inputAddress2" placeholder=""
+              [(ngModel)]="accountInfo['Email']" readonly>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="inputEmail4">Name: </label>
+          </div>
+          <div class="form-group col-md-9">
+            <input type="email" class="form-control" id="inputAddress2" placeholder=""
+              [(ngModel)]="accountInfo['Display Name']" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputAddress2">Address</label>
+          <textarea class="form-control" aria-label="With textarea" [(ngModel)]="accountInfo['Address']" readonly
+            rows="6"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <div class="form-group">
+              <label for="inputAddress2">Invoice Date</label>
+              <input type="text" placeholder="" class="form-control" [(ngModel)]="invoice['Invoice Date']"
+                [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" bsDatepicker>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <div class="form-group">
+              <label for="inputAddress2">Expiry Date</label>
+              <input type="text" placeholder="" class="form-control" [(ngModel)]="invoice['Expiry Date']"
+                [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" bsDatepicker>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <div class="form-group">
+              <label for="inputAddress2">Class</label>
+              <select class="custom-select" id="inputGroupSelect01">
+                <option selected value="Class 0">Class 0</option>
+                <option selected value="Class 1">Class 1</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <label>Line of Items:</label>
+
+        <div>
+          <ngx-datatable class="bootstrap " [headerHeight]="50" [limit]="100" [messages]="{emptyMessage:''}"
+            [columnMode]="'force'" [footerHeight]="0" [rowHeight]="'auto'" [rows]="tableRows" [scrollbarH]="true">
+            <ngx-datatable-column name="#" [sortable]="false" maxWidth="40">
+              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <label class="form-control">{{rowIndex+1}}</label>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Product/Service" [sortable]="false" maxWidth="150">
+              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <select class="custom-select" id="inputGroupSelect01" value="Audit"
+                  [(ngModel)]="tableRows[rowIndex]['Product']">
+                  <option [value]="option" *ngFor="let option of lineOptions">{{option}}</option>
+                </select>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Description" [sortable]="false">
+              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <input type="text" placeholder="" class="form-control" [(ngModel)]="tableRows[rowIndex]['Description']">
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Amount(HKD)" [sortable]="false" maxWidth="150">
+              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <input type="number" min="0.00" step="1" class="form-control"
+                  [(ngModel)]="tableRows[rowIndex]['Amount']">
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="&nbsp;" [sortable]="false" maxWidth="60">
+              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <button type="button" class="close" aria-label="Delete" (click)='deleteRow(rowIndex)'
+                  class="form-control">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <button type="button" class="btn btn-primary btn-sm" (click)="add()">Add Line</button>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputAddress2"></label>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputAddress2"></label>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputAddress2"></label>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputAddress2" class="float-right">Sub-Total (HKD$):</label>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputAddress2">{{subTotal}}</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <label for="inputAddress2"></label>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputAddress2" class="float-right">Discount Value (HKD$):</label>
+          </div>
+          <div class="form-group col-md-2">
+            <input type="number" min="0.00" step="1" [(ngModel)]="discount">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <label for="inputAddress2"></label>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputAddress2" class="float-right">Total (HKD$):</label>
+          </div>
+          <div class="form-group col-md-2">
+            <label>{{total}}</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <label for="inputAddress2"></label>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputAddress2" class="float-right">Deposit (HKD$):</label>
+          </div>
+          <div class="form-group col-md-2">
+            <input type="number" min="0.00" step="1" [(ngModel)]="deposit">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <label for="inputAddress2"></label>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputAddress2" class="float-right">Balance Due (HKD$):</label>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputAddress2">{{balanceDue}}</label>
+          </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" (click)="next()" *ngIf="!this.invoice['sentDate']"> Save and Send
+          Invoice</button>
+        <button type="submit" class="btn btn-primary" (click)="next()" *ngIf="this.invoice['sentDate']"> Resend modified
+          Invoice</button>
+        <button type="submit" class="btn btn-primary" (click)="confirmInvoice()"
+          *ngIf="this.invoice['sentDate']">Invoice Confirmed and Send document upload request</button>
+
+        <ng-template #invoiceSentMsgTemplate>
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Invoice Sent</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Invoice Sent
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="modalRef.hide()">OK</button>
+          </div>
+        </ng-template>
+
       </div>
-    </div>
-    <div class="form-group col-md-4">
-      <div class="form-group">
-        <label for="inputAddress2">Expiry Date</label>
-        <input type="text" placeholder="" class="form-control" [(ngModel)]="invoice['Expiry Date']" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}"  bsDatepicker>
-      </div>
-    </div>
-    <div class="form-group col-md-4">
-      <div class="form-group">
-        <label for="inputAddress2">Class</label>
-        <select class="custom-select" id="inputGroupSelect01">
-          <option selected value="Class 0">Class 0</option>
-          <option selected value="Class 1">Class 1</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  <label>Line of Items:</label>
-
-  <div >
-       <ngx-datatable
-         class="bootstrap "
-         [headerHeight]="50"
-         [limit]="100"
-         [messages]="{emptyMessage:''}"
-         [columnMode]="'force'"
-         [footerHeight]="0"
-         [rowHeight]="'auto'"
-         [rows]="tableRows"
-         [scrollbarH]="true">
-         <ngx-datatable-column name="#" [sortable]="false" maxWidth="40">
-           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-               <label class="form-control">{{rowIndex+1}}</label>
-           </ng-template>
-         </ngx-datatable-column>
-         <ngx-datatable-column name="Product/Service" [sortable]="false" maxWidth="150">
-           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-              <select class="custom-select" id="inputGroupSelect01" value="Audit" [(ngModel)]="tableRows[rowIndex]['Product']">
-                 <option  [value]="option" *ngFor="let option of lineOptions" >{{option}}</option>
-              </select> 
-           </ng-template>
-         </ngx-datatable-column>
-         <ngx-datatable-column name="Description" [sortable]="false">
-           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-              <input type="text" placeholder="" class="form-control" [(ngModel)]="tableRows[rowIndex]['Description']">
-           </ng-template>
-         </ngx-datatable-column>
-         <ngx-datatable-column name="Amount(HKD)" [sortable]="false" maxWidth="150" >
-           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-              <input type="number" min="0.00"  step="1" class="form-control"  [(ngModel)]="tableRows[rowIndex]['Amount']">
-           </ng-template>
-         </ngx-datatable-column>
-         <ngx-datatable-column name="&nbsp;" [sortable]="false" maxWidth="60">
-           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-             <button type="button" class="close" aria-label="Delete" (click)='deleteRow(rowIndex)' class="form-control">
-                <span aria-hidden="true">&times;</span>
-             </button>
-           </ng-template>
-         </ngx-datatable-column>
-       </ngx-datatable>
-   </div>
-   <div class="form-row">
-    <div class="form-group col-md-2">
-        <button type="button" class="btn btn-primary btn-sm" (click)="add()">Add Line</button>
-    </div>
-    <div class="form-group col-md-2">
-        <label for="inputAddress2"></label>
-    </div>
-    <div class="form-group col-md-2">
-        <label for="inputAddress2"></label>
-    </div>
-    <div class="form-group col-md-2">
-        <label for="inputAddress2"></label>
-    </div>
-    <div class="form-group col-md-2">
-        <label for="inputAddress2" class="float-right">Sub-Total (HKD$):</label>
-    </div>
-    <div class="form-group col-md-2" >
-        <label for="inputAddress2">{{subTotal}}</label>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-8">
-        <label for="inputAddress2"></label>
-    </div>
-    <div class="form-group col-md-2">
-        <label for="inputAddress2" class="float-right">Discount Value (HKD$):</label>
-    </div>
-    <div class="form-group col-md-2" >
-        <input type="number" min="0.00"  step="1"   [(ngModel)]="discount">
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-8">
-        <label for="inputAddress2"></label>
-    </div>
-    <div class="form-group col-md-2">
-        <label for="inputAddress2" class="float-right" >Total (HKD$):</label>
-    </div>
-    <div class="form-group col-md-2" >
-        <label >{{total}}</label>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-8">
-        <label for="inputAddress2"></label>
-    </div>
-    <div class="form-group col-md-2">
-        <label for="inputAddress2" class="float-right">Deposit (HKD$):</label>
-    </div>
-    <div class="form-group col-md-2" >
-        <input type="number" min="0.00"  step="1"   [(ngModel)]="deposit">
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-8">
-        <label for="inputAddress2"></label>
-    </div>
-    <div class="form-group col-md-2">
-        <label for="inputAddress2" class="float-right">Balance Due (HKD$):</label>
-    </div>
-    <div class="form-group col-md-2" >
-        <label for="inputAddress2">{{balanceDue}}</label>
-    </div>
-  </div>
-
-
-  <button type="submit" class="btn btn-primary" (click)="next()" *ngIf="!this.invoice['sentDate']"> Save and Send Invoice</button>
-  <button type="submit" class="btn btn-primary" (click)="next()" *ngIf="this.invoice['sentDate']"> Resend modified Invoice</button>
-  <button type="submit" class="btn btn-primary" (click)="confirmInvoice()" *ngIf="this.invoice['sentDate']">Invoice Confirmed and Send document upload request</button>
-
-<ng-template #invoiceSentMsgTemplate>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Invoice Sent</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    Invoice Sent
-  </div>
-  <div class="modal-footer">
-      <button type="button" class="btn btn-default" (click)="modalRef.hide()">OK</button>
-  </div>
-</ng-template>
-
-</div>
-</accordion-group>
-</accordion>
+    </accordion-group>
+  </accordion>
 </div>

@@ -23,13 +23,13 @@ export class NewaccountInvoiceComponent implements OnInit {
   }
   modalRef: BsModalRef;
   id: string;
-  
-  @ViewChild('invoiceSentMsgTemplate') templateref: TemplateRef<any>;  
+
+  @ViewChild('invoiceSentMsgTemplate') templateref: TemplateRef<any>;
   invoice={};
 
   accountInfo={};
   accountList=[];
-  
+
   discount=0;
   deposit=0;
 
@@ -58,7 +58,7 @@ export class NewaccountInvoiceComponent implements OnInit {
       }
       localStorage.setItem('accountList', JSON.stringify(this.accountList));
       this.modalRef = this.modalService.show(this.templateref);
-  }   
+  }
 
 
 
@@ -119,7 +119,7 @@ export class NewaccountInvoiceComponent implements OnInit {
        if (!this.accountList) {
            return;
        }
-       
+
        var foundindex=0;
        for (var i=0; i < this.accountList.length; i ++) {
            if (this.accountList[i]['Company Name'] === this.id){

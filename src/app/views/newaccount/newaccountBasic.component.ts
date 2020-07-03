@@ -18,12 +18,12 @@ export class NewaccountBasicComponent implements OnInit {
   }
 
   id: string;
-  
+
   accountInfo={};
   accountList=[];
 
   next(): void {
-      this.accountInfo['Status'] = '1. Quotation'; 
+      this.accountInfo['Status'] = '1. Quotation';
       var foundindex=-1;
       for (var i=0; i< this.accountList.length; i ++) {
          if (this.accountList[i]['Company Name'] === this.accountInfo['Company Name']) {
@@ -38,7 +38,7 @@ export class NewaccountBasicComponent implements OnInit {
       }
       localStorage.setItem('accountList', JSON.stringify(this.accountList));
       this.router.navigate(['newaccount','quotation', this.id]);
-  }   
+  }
   ngOnInit(): void {
     // generate random values for mainChart
     this.route.params.subscribe(params => {
