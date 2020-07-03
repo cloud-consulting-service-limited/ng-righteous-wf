@@ -25,23 +25,25 @@ export class NewaccountCreateComponent implements OnInit {
   tableHeadersSub = [{"name":"Name of sub","prop":"Name of sub"},{"name":"Place of sub","prop":"Place of sub"},{"name":"% of holding sub","prop":"% of holding sub"}, {"name":"Activity of sub","prop":"Activity of sub"}];
   tableHeadersAsso = [{"name":"Name of asso","prop":"Name of asso"},{"name":"Place of asso","prop":"Place of asso"},{"name":"% of holding asso","prop":"% of holding asso"}, {"name":"Activity of asso","prop":"Activity of asso"}];
   tableHeadersShareHolder = [{"name":"Name","prop":"Name"}, {"name":"CY","prop":"CY"},{"name":"LY","prop":"LY"}];
-  tableHeadersAmoutdueCo = [{"name":"Name","prop":"Name"}, {"name":"CY","prop":"CY"},{"name":"LY","prop":"LY"}];
-  tableHeadersAmoutdueSub = [{"name":"Name","prop":"Name"}, {"name":"CY","prop":"CY"},{"name":"LY","prop":"LY"}];
+  tableHeadersAmountdueCo = [{"name":"Name","prop":"Name"}, {"name":"CY","prop":"CY"},{"name":"LY","prop":"LY"}];
+  tableHeadersAmountdueSub = [{"name":"Name","prop":"Name"}, {"name":"CY","prop":"CY"},{"name":"LY","prop":"LY"}];
 
   tableRows = [];
   tableRowsSub = [];
   tableRowsAsso = [];
   tableRowsShareHolder = [];
-  tableRowsAmoutdueCo = [];
-  tableRowsAmoutdueSub = [];
+  tableRowsAmountdueCo = [];
+  tableRowsAmountdueSub = [];
 
-  editing ={}
-  editingSub ={}
-  editingAsso ={}
-  editingShareHolder ={}
-  editingAmoutdueCo ={}
-  editingAmoutdueSub ={}
-  accountDetail = {}
+  editing ={};
+  editingSub ={};
+  editingAsso ={};
+  editingShareHolder ={};
+  editingAmountdueCo ={};
+  editingAmountdueSub ={};
+  accountDetail = {};
+  accountList = [];
+  accountInfo = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -50,7 +52,16 @@ export class NewaccountCreateComponent implements OnInit {
   }
 
   id: string;
-   
+
+  save() {
+    this.accountDetail['directors'] = this.tableRows;
+    this.accountDetail['sub'] = this.tableRowsSub;
+    this.accountDetail['asso'] = this.tableRowsAsso;
+    this.accountDetail['share-holder'] = this.tableRowsShareHolder;
+    this.accountDetail['amount-due-co'] = this.tableRowsAmountdueCo;
+    this.accountDetail['amount-due-sub'] = this.tableRowsAmountdueSub;
+    localStorage.setItem('accountList', JSON.stringify(this.accountList));
+  }
   add() {
     let temp = [...this.tableRows];
     temp.push( {"Name": "Double Click to Edit","Option": "Double Click to Edit","Appointed On": "Double Click to Edit","Resigned On": "Double Click to Edit", "Salary":"Double Click to Edit", "MPF":"Double Click to Edit"});
@@ -99,28 +110,28 @@ export class NewaccountCreateComponent implements OnInit {
     this.tableRowsShareHolder = temp;
   }
 
-  addAmoutdueCo() {
-    let temp = [...this.tableRowsAmoutdueCo];
+  addAmountdueCo() {
+    let temp = [...this.tableRowsAmountdueCo];
     temp.push( {"Name": "Double Click to Edit","CY": "Double Click to Edit","LY": "Double Click to Edit"});
-    this.tableRowsAmoutdueCo = temp;
+    this.tableRowsAmountdueCo = temp;
   }
 
-  deleteRowAmoutdueCo(rowIndex) {
-    let temp = [...this.tableRowsAmoutdueCo];
+  deleteRowAmountdueCo(rowIndex) {
+    let temp = [...this.tableRowsAmountdueCo];
     temp.splice(rowIndex, 1);
-    this.tableRowsAmoutdueCo = temp;
+    this.tableRowsAmountdueCo = temp;
   }
 
-  addAmoutdueSub() {
-    let temp = [...this.tableRowsAmoutdueSub];
+  addAmountdueSub() {
+    let temp = [...this.tableRowsAmountdueSub];
     temp.push( {"Name": "Double Click to Edit","CY": "Double Click to Edit","LY": "Double Click to Edit"});
-    this.tableRowsAmoutdueSub= temp;
+    this.tableRowsAmountdueSub= temp;
   }
 
-  deleteRowAmoutdueSub(rowIndex) {
-    let temp = [...this.tableRowsAmoutdueSub];
+  deleteRowAmountdueSub(rowIndex) {
+    let temp = [...this.tableRowsAmountdueSub];
     temp.splice(rowIndex, 1);
-    this.tableRowsAmoutdueSub = temp;
+    this.tableRowsAmountdueSub = temp;
   }
 
   updateValue(event, cell, rowIndex) {
@@ -167,26 +178,26 @@ export class NewaccountCreateComponent implements OnInit {
     this.editingShareHolder[rowIndex + '-' + cell] = true;
   }
 
-  updateValueAmoutdueCo(event, cell, rowIndex) {
-    this.editingAmoutdueCo[rowIndex + '-' + cell] = false;
-    this.tableRowsAmoutdueCo[rowIndex][cell] = event.target.value;
-    this.tableRowsAmoutdueCo = [...this.tableRowsAmoutdueCo];
+  updateValueAmountdueCo(event, cell, rowIndex) {
+    this.editingAmountdueCo[rowIndex + '-' + cell] = false;
+    this.tableRowsAmountdueCo[rowIndex][cell] = event.target.value;
+    this.tableRowsAmountdueCo = [...this.tableRowsAmountdueCo];
   }
 
-  editCellAmoutdueCo(cell, rowIndex) {
-    this.editingAmoutdueCo = {};
-    this.editingAmoutdueCo[rowIndex + '-' + cell] = true;
+  editCellAmountdueCo(cell, rowIndex) {
+    this.editingAmountdueCo = {};
+    this.editingAmountdueCo[rowIndex + '-' + cell] = true;
   }
 
-  updateValueAmoutdueSub(event, cell, rowIndex) {
-    this.editingAmoutdueSub[rowIndex + '-' + cell] = false;
-    this.tableRowsAmoutdueSub[rowIndex][cell] = event.target.value;
-    this.tableRowsAmoutdueSub = [...this.tableRowsAmoutdueSub];
+  updateValueAmountdueSub(event, cell, rowIndex) {
+    this.editingAmountdueSub[rowIndex + '-' + cell] = false;
+    this.tableRowsAmountdueSub[rowIndex][cell] = event.target.value;
+    this.tableRowsAmountdueSub = [...this.tableRowsAmountdueSub];
   }
 
-  editCellAmoutdueSub(cell, rowIndex) {
-    this.editingAmoutdueSub = {};
-    this.editingAmoutdueSub[rowIndex + '-' + cell] = true;
+  editCellAmountdueSub(cell, rowIndex) {
+    this.editingAmountdueSub = {};
+    this.editingAmountdueSub[rowIndex + '-' + cell] = true;
   }
 
 
