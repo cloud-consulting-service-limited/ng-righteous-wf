@@ -26,17 +26,18 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="date-of-name-change">Date of name change(i.e. 15 Mar 2019)</span>
     </div>
-    <input type="text" placeholder="" class="form-control" [(ngModel)]="accountDetail['date-of-name-change']"
-      bsDatepicker />
+    <input type="text" placeholder="" class="form-control" [(ngModel)]="accountDetail['date-of-name-change'] "
+      bsDatepicker [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}"/>
   </div>
 
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="limited-by-shares-or-guarantee">Limited by shares or guarantee</span>
     </div>
-    <input type="text" class="form-control" placeholder="Limited by shares or guarantee"
-      aria-label="Limited by shares or guarantee" aria-describedby="Limited by shares or guarantee"
-      [(ngModel)]="accountDetail['limited-by-shares-or-gurantee']" />
+    <select class="custom-select" id="limited-by-shares-or-guarantee-input" [(ngModel)]="accountDetail['limited-by-shares-or-gurantee']">
+      <option value=" 1" selected>Limited by share</option>
+      <option value="2">Limited by guarantee</option>
+    </select>
   </div>
 
   <div class="input-group mb-3">
@@ -86,14 +87,14 @@
       <span class="input-group-text" id="principal-activities">Principal activities</span>
     </div>
     <input type="text" class="form-control" placeholder="Principal activities" aria-label="Principal activities"
-      aria-describedby="Principal activities" [(ngModel)]="accountDetail['financial-activities']>
+      aria-describedby="Principal activities" [(ngModel)]="accountDetail['financial-activities']">
   </div>
 
   <div class=" input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="director-appointment-clause">Director- Appointment clause</span>
     </div>
-    <select class="custom-select" id="director-appointment-clause-input" [(ngModel)]="accountDetail['director-appointment-clause']>
+    <select class="custom-select" id="director-appointment-clause-input" [(ngModel)]="accountDetail['director-appointment-clause']">
       <option value=" 1" selected>Retired and eligible</option>
       <option value="2">No provision</option>
       <option value="3">Unlimited</option>
@@ -105,7 +106,7 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="permitted-indemnity">Permitted Indemnity</span>
     </div>
-    <select class="custom-select" id="permitted-indemnity-input" [(ngModel)]="accountDetail['permitted-indemnity']>
+    <select class="custom-select" id="permitted-indemnity-input" [(ngModel)]="accountDetail['permitted-indemnity']">
       <option value=" 1" selected>No</option>
       <option value="2">Yes</option>
     </select>
@@ -115,7 +116,7 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="nature-of-income">Nature of income</span>
     </div>
-    <select class="custom-select" id="nature-of-income-input" [(ngModel)]="accountDetail['nature-of-income']>
+    <select class="custom-select" id="nature-of-income-input" [(ngModel)]="accountDetail['nature-of-income']">
       <option value=" 1" selected>Sales</option>
       <option value="2">Services</option>
       <option value="3">No income</option>
@@ -130,52 +131,58 @@
       <span class="input-group-text" id="offshore">Offshore</span>
     </div>
     <input type="text" class="form-control" placeholder="" aria-label="Offshore" aria-describedby="Offshore"
-      [(ngModel)]="accountDetail['offshore']/>
+      [(ngModel)]="accountDetail['offshore']"/>
   </div>
 
   <div class=" input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="last-year-is-period-or-first-incop">Last year is period or first incop</span>
     </div>
-    <input type="text" class="form-control" placeholder="" aria-label="Last year is period or first incop"
-      aria-describedby="Last year is period or first incop" [(ngModel)]="accountDetail['last-year-is-period-or-first-incop']/>
+    <select class="custom-select" id="last-year-is-period-or-first-incop-input" [(ngModel)]="accountDetail['last-year-is-period-or-first-incop']">
+      <option value=" 1" selected>No</option>
+      <option value="2">Yes</option>
+    </select>
   </div>
 
   <div class=" input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="first-incorp-date">first incorp date (eg 15 Mar 17)</span>
     </div>
-    <input type="text" placeholder="" class="form-control" bsDatepicker [(ngModel)]="accountDetail['first-incorp-date']/>
+    <input type="text" placeholder="" class="form-control"  [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" bsDatepicker [(ngModel)]="accountDetail['first-incorp-date'] "/>
   </div>
 
   <div class=" input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="first-incorporated">First incorporated?</span>
     </div>
-    <input type="text" class="form-control" placeholder="" aria-label="First incorporated"
-      aria-describedby="First incorporated" [(ngModel)]="asccountDetail['first-incorporated']/>
+    <select class="custom-select" id="first-incorporated-input" [(ngModel)]="accountDetail['first-incorporated']">
+      <option value=" 1" selected>No</option>
+      <option value="2">Yes</option>
+    </select>
   </div>
 
   <div class=" input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="first-sme-frs">First SME FRS?</span>
     </div>
-    <input type="text" class="form-control" placeholder="" aria-label="First SME FRS" aria-describedby="First SME FRS"
-      [(ngModel)]="asccountDetail['first-sme-frs']/>
+    <select class="custom-select" id="first-sme-frs-input" [(ngModel)]="accountDetail['first-sme-frs']">
+      <option value=" 1" selected>No</option>
+      <option value="2">Yes</option>
+    </select>
   </div>
 
   <div class=" input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="input-this-year-ye">Input this year YE here (eg 15 Mar 17)</span>
     </div>
-    <input type="text" placeholder="" class="form-control" bsDatepicker [(ngModel)]="asccountDetail['input-this-year-ye']/>
+    <input type="text" placeholder="" class="form-control" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" bsDatepicker [(ngModel)]="accountDetail['input-this-year-ye'] "/>
   </div>
 
   <div class=" input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="currenccy">Currency</span>
     </div>
-    <select class="custom-select" id="currency-input" [(ngModel)]="asccountDetail['currency']>
+    <select class="custom-select" id="currency-input" [(ngModel)]="accountDetail['currency']">
       <option value=" 1" selected>HK$</option>
       <option value="2">US$</option>
       <option value="3">CAD</option>
@@ -189,7 +196,7 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="type-of-co">Type of Co</span>
     </div>
-    <select class="custom-select" id="type-of-co-input" [(ngModel)]="asccountDetail['type-of-co']>
+    <select class="custom-select" id="type-of-co-input" [(ngModel)]="accountDetail['type-of-co']">
       <option value=" 1" selected>Company</option>
       <option value="2">Association</option>
       <option value="3">Group</option>
@@ -201,30 +208,34 @@
       <span class="input-group-text" id="no-shares">No. shares</span>
     </div>
     <input type="text" class="form-control" placeholder="" aria-label="No. shares" aria-describedby="No. shares"
-      [(ngModel)]="asccountDetail['no-shares']/>
+      [(ngModel)]="accountDetail['no-shares']"/>
   </div>
 
   <div class=" input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="ro">RO</span>
     </div>
-    <input type="text" class="form-control" placeholder="" aria-label="RO" aria-describedby="RO" [(ngModel)]="asccountDetail['ro']/>
+    <input type="text" class="form-control" placeholder="" aria-label="RO" aria-describedby="RO" [(ngModel)]="accountDetail['ro']"/>
   </div>
 
   <div class=" input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="any-holding-co">Any holding co</span>
     </div>
-    <input type="text" class="form-control" placeholder="" aria-label="Any holding co" aria-describedby="Any holding co"
-      [(ngModel)]="asccountDetail['any-holding-co']/>
+    <select class="custom-select" id="any-holding-co-input" [(ngModel)]="accountDetail['any-holding-co']">
+      <option value=" 1" selected>No</option>
+      <option value="2">Yes</option>
+    </select>
   </div>
 
   <div class=" input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="any-immediate-co">Any immediate co</span>
     </div>
-    <input type="text" class="form-control" placeholder="" aria-label="Any immediate co"
-      aria-describedby="Any immediate co" [(ngModel)]="asccountDetail['any-immediate-co']/>
+    <select class="custom-select" id="any-immediate-co-input" [(ngModel)]="accountDetail['any-immediate-co']">
+      <option value=" 1" selected>No</option>
+      <option value="2">Yes</option>
+    </select>
   </div>
 
   <label>Sub</label>

@@ -3,7 +3,7 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import {Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
-import { ActivatedRoute, Route, ActivatedRouteSnapshot, UrlSegment, Params, Data } from '@angular/router';
+import { ActivatedRoute, Route, ActivatedRouteSnapshot, UrlSegment, Params, Data, Router } from '@angular/router';
 
 
 
@@ -21,6 +21,7 @@ import { ActivatedRoute, Route, ActivatedRouteSnapshot, UrlSegment, Params, Data
   ]
 })
 export class NewaccountCreateComponent implements OnInit {
+
   tableHeaders = [{"name":"Name","prop":"Name"}, {"name":"Option","prop":"Option"}, {"name":"Appointed On", "prop":"Appointed On"}, {"name":"Resigned On", "prop":"Resigned On"},{"name":"Salary", "prop":"Salary"}, {"name":"MPF","prop":"MPF"}];
   tableHeadersSub = [{"name":"Name of sub","prop":"Name of sub"},{"name":"Place of sub","prop":"Place of sub"},{"name":"% of holding sub","prop":"% of holding sub"}, {"name":"Activity of sub","prop":"Activity of sub"}];
   tableHeadersAsso = [{"name":"Name of asso","prop":"Name of asso"},{"name":"Place of asso","prop":"Place of asso"},{"name":"% of holding asso","prop":"% of holding asso"}, {"name":"Activity of asso","prop":"Activity of asso"}];
@@ -47,6 +48,7 @@ export class NewaccountCreateComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
   ) {
     console.log("contructing NewaccountCreateComponent")
   }
@@ -60,7 +62,9 @@ export class NewaccountCreateComponent implements OnInit {
     this.accountDetail['share-holder'] = this.tableRowsShareHolder;
     this.accountDetail['amount-due-co'] = this.tableRowsAmountdueCo;
     this.accountDetail['amount-due-sub'] = this.tableRowsAmountdueSub;
+    this.accountInfo['accountDetail']=this.accountDetail;
     localStorage.setItem('accountList', JSON.stringify(this.accountList));
+    this.router.navigate(['newaccount']);
   }
   add() {
     let temp = [...this.tableRows];
@@ -229,8 +233,16 @@ export class NewaccountCreateComponent implements OnInit {
        }
        if (foundindex < 0 ) return;
        this.accountInfo = this.accountList[foundindex];
-       if (this.accountInfo['detail']) {
-           this.accountDetail = this.accountInfo['detail'];
+       if (this.accountInfo['accountDetail']) {
+           this.accountDetail = this.accountInfo['accountDetail'];
+           this.tableRows = this.accountDetail['directors'];
+           this.tableRowsSub = this.accountDetail['sub'];
+           this.tableRowsAsso = this.accountDetail['asso'];
+           this.tableRowsShareHolder = this.accountDetail['share-holder'];
+           this.tableRowsAmountdueCo = this.accountDetail['amount-due-co'];
+           this.tableRowsAmountdueSub = this.accountDetail['amount-due-sub'];
+           this.accountDetail = this.accountInfo['accountDetail'];
+
        }
     });
   }

@@ -144,6 +144,8 @@ export class NewaccountInvoiceComponent implements OnInit {
           this.invoice["Invoice Date"] = new Date(this.invoice["Invoice Date"]);
        } else {
           this.tableRows = this.accountInfo['quotations'][0]['lineItems'];
+          this.discount=this.accountInfo['quotations'][0]['discount'];
+          this.deposit=this.accountInfo['quotations'][0]['deposit'];
        }
     });
 
