@@ -14,41 +14,41 @@ export class NewaccountComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
   ) {
-    console.log("constructing NewaccountComponent")
+    console.log('constructing NewaccountComponent');
   }
 
   selected: string;
   accountList: any;
-  selectedIndex: string;s
+  selectedIndex: string;
   noResult = true;
   id: string;
 
-  tableRows = [ {"Company Name": "TCC Consulting Service Limited", "Status": "3. Enter account details"},  {"Company Name": "Cloud Consulting Service Limited", "Status": "2. Invoice"}]
+  tableRows = [ {'Company Name': 'TCC Consulting Service Limited', 'Status': '3. Enter account details'},  {'Company Name': 'Cloud Consulting Service Limited', 'Status': '2. Invoice'}];
 
-  tableHeaders = [{"name":"Company Name","prop":"Company Name"}, {"name":"Status","prop":"Status"} ];
+  tableHeaders = [{'name': 'Company Name', 'prop': 'Company Name'}, {'name': 'Status', 'prop': 'Status'}];
 
   continue(rowIndex): void {
-    var account = this.tableRows[rowIndex];
-    var status = account['Status'].charAt(0);
-    var route = "";
+    const account = this.tableRows[rowIndex];
+    const status = account['Status'].charAt(0);
+    let route = '';
     switch (status) {
      case '1':
-       route = "quotation"
+       route = 'quotation';
        break;
      case '2':
-       route = "invoice"
+       route = 'invoice';
        break;
      case '3':
-       route = "document"
+       route = 'document';
        break;
      case '4':
-       route = "detail"
+       route = 'detail';
        break;
      default:
-       route = "create"
+       route = 'create';
     }
-    console.log("status:"+status+" route:"+route);
-    this.router.navigate(['newaccount',route, account['Company Name']]);
+    console.log('status:' + status + ' route:' + route);
+    this.router.navigate(['newaccount', route, account['Company Name']]);
 
   }
 
@@ -64,27 +64,28 @@ export class NewaccountComponent implements OnInit {
 
 
        this.id =  route.params['id'];
-       console.log("id: "+this.id);
+       console.log('id: ' + this.id);
     });
 
-    var stringAccountList = localStorage.getItem('accountList');
+    const stringAccountList = localStorage.getItem('accountList');
+    console.log(stringAccountList);
     this.accountList = JSON.parse(stringAccountList);
     if (!this.accountList) {
-        this.accountList = [ {"Company Name": "TCC Consulting Service Limited", "Status": "3. Upload Documents"},  {"Company Name": "Cloud Consulting Service Limited", "Status": "2. Invoice"}];
+        this.accountList = [ {'Company Name': 'TCC Consulting Service Limited', 'Status': '3. Upload Documents'},  {'Company Name': 'Cloud Consulting Service Limited', 'Status': '2. Invoice'}];
     }
-    this.tableRows=this.accountList;
+    this.tableRows = this.accountList;
 
   }
 
   typeaheadNoResults(event: string): void {
-    var foundindex=-1;
-    for (var i=0; i< this.tableRows.length; i ++) {
+    let foundindex = -1;
+    for (let i = 0; i < this.tableRows.length; i ++) {
       if (this.tableRows[i]['Company Name'] === this.selected) {
-         foundindex =i;
+         foundindex = i;
          break;
       }
     }
-    if (foundindex >=0) this.selectedIndex = foundindex.toString();
+    if (foundindex >= 0) { this.selectedIndex = foundindex.toString(); }
     this.noResult = (foundindex < 0 );
   }
 

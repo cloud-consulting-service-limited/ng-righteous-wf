@@ -34,6 +34,13 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot()
   ],
-  declarations: [ NewaccountComponent ,NewaccountCreateComponent, NewaccountBasicComponent, NewaccountQuotationComponent,NewaccountInvoiceComponent, NewaccountDocumentComponent]
+
+  declarations: [ NewaccountComponent
+    , NewaccountCreateComponent
+    , NewaccountBasicComponent
+    , NewaccountQuotationComponent
+    , NewaccountInvoiceComponent
+    , NewaccountDocumentComponent
+  ]
 })
 export class NewaccountModule { }

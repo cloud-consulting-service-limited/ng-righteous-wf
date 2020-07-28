@@ -1,0 +1,157 @@
+<div class="animated fadeIn">
+  <h1 class="display-3">Pre Audit Docuemnt (S1)</h1>
+  <hr />
+  <accordion>
+    <accordion-group heading="Customer Document Upload History" [isOpen]="false">
+      <ngx-datatable class="bootstrap " [headerHeight]="50" [limit]="3" [messages]="{emptyMessage:''}"
+        [columnMode]="'force'" [footerHeight]="30" [rowHeight]="'auto'" [rows]="auditInfo['documentsUploaded']"
+        [scrollbarH]="true">
+        <ngx-datatable-column name="#" [sortable]="false" maxWidth="40">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label>{{rowIndex+1}}</label>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="File Type" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label class="form-control">File Type</label>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="File Name" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label class="form-control">File Name</label>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Uploaded Date" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label class="form-control"></label>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </accordion-group>
+
+    <accordion-group [heading]="documentContentHeader" [isOpen]="true">
+
+      <div class="container">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">English</label>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">中文</label>
+          </div>
+          <div class="form-group col-md-1">
+            <label for="inputEmail4">Ask</label>
+          </div>
+          <div class="form-group col-md-1">
+            <label for="inputEmail4">Uploaded</label>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputEmail4">Checked</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <hr />
+          </div>
+        </div>
+        <div class="form-row" *ngFor="let item of documentRequestList ; let i = index">
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">{{item["English"]}}</label>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">{{item["Chinese"]}}</label>
+          </div>
+          <div class="form-group col-md-1">
+            <input type="checkbox" [(ngModel)]="this.documentRequestList[i]['Asked']" />
+          </div>
+          <div class="form-group col-md-1">
+            <label *ngIf="this.documentRequestList[i]['Uploaded']"> &#10004; </label>
+          </div>
+          <div class="form-group col-md-2">
+            <input type="checkbox" [(ngModel)]="this.documentRequestList[i]['Checked']" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" (click)="requestDocument()" *ngIf="!this.document['sentDate']"> Send Document
+          Reques to Client</button>
+        <button type="submit" class="btn btn-primary" (click)="requestDocument()" *ngIf="this.document['sentDate']"> Resend
+          Additional Document Request</button>
+        <button type="submit" class="btn btn-primary" (click)="confirmDocument()"
+          *ngIf="this.document['sentDate']">Documents Confirmed</button>
+
+        <ng-template #documentSentMsgTemplate>
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Document Sent</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Document Sent
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="modalRef.hide()">OK</button>
+          </div>
+        </ng-template>
+
+      </div>
+    </accordion-group>
+
+    <accordion-group heading="Company Info" [isOpen]="false">
+      <div class="container">
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="inputCompany">Company Name :</label>
+          </div>
+          <div class="form-group col-md-9">
+            <input type="text" class="form-control" id="inputCompany" placeholder=""
+              [(ngModel)]="accountInfo['Company Name']" readonly>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="inputAddress">Email :</label>
+          </div>
+          <div class="form-group col-md-9">
+            <input type="email" class="form-control" id="inputAddress2" placeholder=""
+              [(ngModel)]="accountInfo['Email']" readonly>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="inputEmail4">Name: </label>
+          </div>
+          <div class="form-group col-md-9">
+            <input type="email" class="form-control" id="inputAddress2" placeholder=""
+              [(ngModel)]="accountInfo['Display Name']" readonly>
+          </div>
+        </div>
+      </div>
+    </accordion-group>
+
+    <accordion-group heading="Document Request send History" [isOpen]="false">
+      <ngx-datatable class="bootstrap " [headerHeight]="50" [limit]="3" [messages]="{emptyMessage:''}"
+        [columnMode]="'force'" [footerHeight]="30" [rowHeight]="'auto'" [rows]="auditInfo['documents']"
+        [scrollbarH]="true">
+        <ngx-datatable-column name="#" [sortable]="false" maxWidth="40">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label>{{rowIndex+1}}</label>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Sent Date" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label
+              class="form-control">{{auditInfo['documents'][rowIndex]['sentDate'] | date: 'yyyy-MM-dd HH:mm:ss' }}</label>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Number of Documents" [sortable]="false">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label class="form-control">{{auditInfo['documents'][rowIndex]['documentAskedCount'] }}</label>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </accordion-group>
+
+  </accordion>
+</div>

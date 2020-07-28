@@ -45,5 +45,10 @@ export const navItems: INavData[] = [
     name: 'Other CS',
     url: '/othercs',
     icon: 'icon-speedometer'
+  },
+  {
+    name: 'load sample',
+    url: '/loaddata',
+    icon: 'icon-speedometer'
   }
 ];

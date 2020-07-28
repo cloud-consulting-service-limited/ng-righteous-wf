@@ -1,0 +1,132 @@
+<div class="animated fadeIn">
+  <h1 class="display-3">TB</h1>
+  <hr />
+  <accordion>
+    <accordion-group heading="TB" [isOpen]="true">
+      <ngx-datatable class="bootstrap " [headerHeight]="50" [messages]="{emptyMessage:''}" [columnMode]="'force'"
+        [footerHeight]="0" [rowHeight]="'auto'" [rows]="thisTB" [scrollbarH]="true">
+
+
+        <ngx-datatable-column [sortable]="false" maxWidth="40" name="#">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <label>{{ rowIndex}}</label>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [sortable]="false" maxWidth="250" name="Account break down">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+              ngModel='{{thisTB[rowIndex]["Account break down"]}}' />
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [sortable]="false" maxWidth="250" name="Group as per audit record">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+              ngModel='{{thisTB[rowIndex]["Group as per audit record"]}}' readonly />
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [sortable]="false" maxWidth="100" name="Last Year Audit" aria-label="Last Year Audit">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <div class="text-center"> Last Year <br> Audit </div>
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+              ngModel='{{thisTB[rowIndex]["Last Year Audit"]}}' />
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [sortable]="false" maxWidth="100" name="Current Year Audit">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <div class="text-center"> Current Year <br> Audit </div>
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+              ngModel='{{thisTB[rowIndex]["Current Year Audit"]}}' />
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [sortable]="false" maxWidth="100" name="Current Year Per Client">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <div class="text-center"> Current Year <br> Per Client </div>
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+              ngModel='{{thisTB[rowIndex]["Current Year Pe Client"]}}' />
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [sortable]="false" width="300" name="Current Year Adjustment">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <div class="text-center"> Current Year <br> Adjustment </div>
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <accordion>
+              <accordion-group heading="Adjustment for" [isOpen]="false" [panelClass]="customClass">
+                <div class="input-group ">
+                  <div class="input-group-prepend ">
+                    <span class="input-group-text "
+                      style="width: 150px;">{{thisTB[rowIndex]["Current Year Adjustment"][0]["name"]}}</span>
+                  </div>
+                  <input type="text" class="form-control" aria-describedby="basic-addon3"
+                    ngModel='{{thisTB[rowIndex]["Current Year Adjustment"][0]["value"]}}' />
+                </div>
+                <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      style="width: 150px;">{{thisTB[rowIndex]["Current Year Adjustment"][1]["name"]}}</span>
+                  </div>
+                  <input type="number" step="1.0" class="form-control" aria-describedby="basic-addon3"
+                    ngModel='{{thisTB[rowIndex]["Current Year Adjustment"][1]["value"]}}' />
+                </div>
+                <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      style="width: 150px;">{{thisTB[rowIndex]["Current Year Adjustment"][2]["name"]}}</span>
+                  </div>
+                  <input type="number" step="1.0" class="form-control" aria-describedby="basic-addon3"
+                    ngModel='{{thisTB[rowIndex]["Current Year Adjustment"][2]["value"]}}' />
+                </div>
+                <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      style="width: 150px;">{{thisTB[rowIndex]["Current Year Adjustment"][3]["name"]}}</span>
+                  </div>
+                  <input type="number" step="1.0" class="form-control" aria-describedby="basic-addon3"
+                    ngModel='{{thisTB[rowIndex]["Current Year Adjustment"][3]["value"]}}' />
+                </div>
+                <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <input type="text" class="form-control" style="width: 150px;" aria-describedby="basic-addon3"
+                      ngModel='{{thisTB[rowIndex]["Current Year Adjustment"][4]["name"]}}' />
+                  </div>
+                  <input type="number" step="1.0" class="form-control" aria-describedby="basic-addon3"
+                    ngModel='{{thisTB[rowIndex]["Current Year Adjustment"][4]["value"]}}' />
+                </div>
+                <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <input type="text" class="form-control" style="width: 150px;" aria-describedby="basic-addon3"
+                      ngModel='{{thisTB[rowIndex]["Current Year Adjustment"][5]["name"]}}' />
+                  </div>
+                  <input type="number" step="1.0" class="form-control" aria-describedby="basic-addon3"
+                    ngModel='{{thisTB[rowIndex]["Current Year Adjustment"][5]["value"]}}' />
+                </div>
+              </accordion-group>
+            </accordion>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [sortable]="false" maxWidth="100" name="Current Year Audit">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <div class="text-center"> Current Year <br> Audit </div>
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+              ngModel='{{thisTB[rowIndex]["Current Year Audit"]}}' />
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </accordion-group>
+
+  </accordion>
+</div>

@@ -119,6 +119,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
       },
       {
+        path: 'loaddata',
+        loadChildren: () => import('./views/loaddata/loaddata.module').then(m => m.LoaddataModule)
+      },
+      {
         path: 'widgets',
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
       }
