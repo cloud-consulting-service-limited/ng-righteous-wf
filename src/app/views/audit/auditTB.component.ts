@@ -72,6 +72,11 @@ export class AuditTBComponent implements OnInit {
 
     req.send();
   }
+  genDocSend(){
+    this.auditInfo['TB'] = this.thisTB;
+    localStorage.setItem('accountList',JSON.stringify(this.accountList));
+    return;
+  }
   ngOnInit(): void {
     // generate random values for mainChart
     this.route.params.subscribe((params) => {
@@ -94,7 +99,7 @@ export class AuditTBComponent implements OnInit {
         return;
       }
 
-      let foundindex = 0;
+      let foundindex = -1;
       for (let i = 0; i < this.accountList.length; i++) {
         if (this.accountList[i]['Company Name'] === this.id) {
           foundindex = i;
@@ -104,7 +109,9 @@ export class AuditTBComponent implements OnInit {
       if (foundindex < 0) {
         return;
       }
+
       this.accountInfo = this.accountList[foundindex];
+      console.log('accountInfo:' + this.accountInfo);
       if (this.accountInfo['accountDetail']) {
         this.accountDetail = this.accountInfo['accountDetail'];
       }
@@ -114,10 +121,13 @@ export class AuditTBComponent implements OnInit {
       ) {
         this.auditInfo = this.accountInfo['audit'][this.currentYearString];
       }
-
-      this.fetch((data) => {
-        this.thisTB = data;
-      });
+      if (!this.auditInfo['TB']) {
+        this.fetch((data) => {
+          this.thisTB = data;
+        });
+      } else {
+        this.thisTB = this.auditInfo['TB'];
+      }
     });
   }
 }

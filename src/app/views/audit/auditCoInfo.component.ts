@@ -244,7 +244,7 @@ export class AuditCoInfoComponent implements OnInit {
         return;
       }
 
-      var foundindex = 0;
+      var foundindex = -1;
       for (var i = 0; i < this.accountList.length; i++) {
         if (this.accountList[i]['Company Name'] === this.id) {
           foundindex = i;

@@ -9,7 +9,7 @@ import { ActivatedRoute, Route, ActivatedRouteSnapshot, UrlSegment, Params, Data
 
 
 @Component({
-  templateUrl: 'auditPreAuditS1.component.html',
+  templateUrl: 'auditTracking.component.html',
   styles: [
     `
       .input-group>.input-group-prepend {
@@ -20,7 +20,7 @@ import { ActivatedRoute, Route, ActivatedRouteSnapshot, UrlSegment, Params, Data
     `
   ]
 })
-export class AuditPreAuditS1Component implements OnInit {
+export class AuditTrackingComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,

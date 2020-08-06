@@ -14,6 +14,7 @@ import { AuditComponent } from './audit.component';
 import { AuditCoInfoComponent } from './auditCoInfo.component';
 import { AuditPreAuditS1Component } from './auditPreAuditS1.component';
 import { AuditTBComponent } from './auditTB.component';
+import { AuditTrackingComponent } from './auditTracking.component';
 import { AuditRoutingModule } from './audit-routing.module';
 
 
@@ -32,6 +33,6 @@ import { AuditRoutingModule } from './audit-routing.module';
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot()
   ],
-  declarations: [ AuditComponent , AuditCoInfoComponent, AuditPreAuditS1Component, AuditTBComponent ]
+  declarations: [ AuditComponent , AuditCoInfoComponent, AuditPreAuditS1Component, AuditTBComponent, AuditTrackingComponent ]
 })
 export class AuditModule { }

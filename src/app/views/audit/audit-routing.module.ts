@@ -5,6 +5,8 @@ import { AuditComponent } from './audit.component';
 import { AuditCoInfoComponent } from './auditCoInfo.component';
 import { AuditPreAuditS1Component } from './auditPreAuditS1.component';
 import { AuditTBComponent } from './auditTB.component';
+import { AuditTrackingComponent } from './auditTracking.component';
+
 
 const routes: Routes = [
   {
@@ -90,18 +92,27 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'document',
-    component: AuditComponent,
+    path: 'tracking',
+    component: AuditTrackingComponent,
     data: {
-      title: 'Audit /  3. Document Upload'
+      title: 'Audit / 3. Document Tracking'
     },
     children: [
       {
         path: ':id',
-        component: AuditComponent,
+        component: AuditTrackingComponent,
         data: {
-          title: 'Audit -> 3. Document Upload'
-        }
+          title: 'Audit / 3. Document Tracking'
+        },
+        children: [
+          {
+            path: ':year',
+            component: AuditTrackingComponent,
+            data: {
+              title: 'Audit -> 3. Document Tracking'
+            }
+          }
+        ]
       }
     ]
   },
