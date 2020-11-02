@@ -229,7 +229,7 @@ export class AuditCoInfoComponent implements OnInit {
 
       while (route.firstChild) {
         route = route.firstChild;
-        this.myroute = Object.assign(this.myroute,route.params );
+        this.myroute = Object.assign(this.myroute, route.params );
       }
 
       console.log('route: ', JSON.stringify(this.myroute));
@@ -238,20 +238,20 @@ export class AuditCoInfoComponent implements OnInit {
 
       console.log('ID: ', this.id);
       console.log('currentYearString: ', this.currentYearString);
-      var stringInput = localStorage.getItem('accountList');
+      const stringInput = localStorage.getItem('accountList');
       this.accountList = JSON.parse(stringInput);
       if (!this.accountList) {
         return;
       }
 
-      var foundindex = -1;
-      for (var i = 0; i < this.accountList.length; i++) {
+      let foundindex = -1;
+      for (let i = 0; i < this.accountList.length; i++) {
         if (this.accountList[i]['Company Name'] === this.id) {
           foundindex = i;
           break;
         }
       }
-      if (foundindex < 0) return;
+      if (foundindex < 0) { return; }
       this.accountInfo = this.accountList[foundindex];
       if (this.accountInfo['accountDetail']) {
         this.accountDetail = this.accountInfo['accountDetail'];

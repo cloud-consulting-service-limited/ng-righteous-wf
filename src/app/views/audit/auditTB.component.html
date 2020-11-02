@@ -36,15 +36,6 @@
             [(ngModel)]='thisTB[rowIndex]["Last Year Audit"]' />
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column [sortable]="false" maxWidth="100" name="Current Year Audit">
-          <ng-template let-column="column" ngx-datatable-header-template>
-            <div class="text-center"> Current Year <br> Audit </div>
-          </ng-template>
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
-            [(ngModel)]='thisTB[rowIndex]["Current Year Audit"]' />
-          </ng-template>
-        </ngx-datatable-column>
 
         <ngx-datatable-column [sortable]="false" maxWidth="100" name="Current Year Per Client">
           <ng-template let-column="column" ngx-datatable-header-template>
@@ -56,13 +47,16 @@
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column [sortable]="false" width="300" name="Current Year Adjustment">
+        <ngx-datatable-column [sortable]="false" minWidth="300" maxWidth="300" name="Current Year Adjustment">
           <ng-template let-column="column" ngx-datatable-header-template>
             <div class="text-center"> Current Year <br> Adjustment </div>
           </ng-template>
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <accordion>
-              <accordion-group heading="Adjustment for" [isOpen]="false" [panelClass]="customClass">
+              <accordion-group [isOpen]="false" [panelClass]="customClass">
+                <span accordion-heading>
+                  {{ getAdjustmentForHeader(thisTB[rowIndex]["Current Year Adjustment"]) }}
+                </span>
                 <div class="input-group ">
                   <div class="input-group-prepend ">
                     <span class="input-group-text "

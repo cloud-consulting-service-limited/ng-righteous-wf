@@ -72,9 +72,7 @@ export class AuditComponent implements OnInit {
 
 
       if (this.accountList[i]['audit'] && this.accountList[i]['audit'][this.currentYearString]) {
-        console.log('audit: ' + JSON.stringify(this.accountList[i]['audit']));
-        console.log('audit currentYear: ' + JSON.stringify(this.accountList[i]['audit'][this.currentYearString]));
-        let tmpObj: { 'Company Name': string; 'Status': string; } = {
+        const tmpObj: { 'Company Name': string; 'Status': string; } = {
           'Company Name': this.accountList[i]['Company Name'],
           'Status': this.accountList[i]['audit'][this.currentYearString]['Audit Status']
         };

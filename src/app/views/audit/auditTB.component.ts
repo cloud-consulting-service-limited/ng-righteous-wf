@@ -77,6 +77,21 @@ export class AuditTBComponent implements OnInit {
     localStorage.setItem('accountList',JSON.stringify(this.accountList));
     return;
   }
+
+  getAdjustmentForHeader(input: [] ) {
+    let returnStr: string;
+    returnStr = '';
+    for (let i = 0; i < input.length; i++) {
+      if (input[i]['value']) {
+        returnStr += input[i]['name'] + ': $ ' + input[i]['value'] + ' , ';
+      }
+    }
+    if (returnStr.length > 0) {
+      return 'Adjustment for [' + returnStr + ']';
+    } else {
+      return 'Add Adjustment';
+    }
+  }
   ngOnInit(): void {
     // generate random values for mainChart
     this.route.params.subscribe((params) => {
