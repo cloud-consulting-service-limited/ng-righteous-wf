@@ -92,7 +92,7 @@
             <td class="table-condensed" colspan="5"><hr/></td>
           </tr>
           <tr >
-            <td class="table-condensed">Sum</td>
+            <td class="table-condensed">(Profit)/ Loss</td>
             <td class="table-condensed" width="300px"></td>
             <td class="table-condensed" width="300px"></td>
             <td class="table-condensed" width="200px">{{getSumLA() | number:'2.2-2'}}</td>
@@ -228,7 +228,7 @@
   <hr/>
 
   <button type="button" class="btn btn-primary btn-lg float-left" (click)="genDocSend()" >
-    Proceed to Generate Report and send to client
+    Proceed to Adjustments
   </button>
 
 </div>
@@ -238,10 +238,40 @@
   
 
 <button type="button" class="btn btn-primary " (click)="scrollToTop()" >
-  Scroll to top
+  Top
+</button>
+<button type="button" class="btn btn-primary " (click)="scroll('input228')" >
+  Goodwill
+</button>
+<button type="button" class="btn btn-primary " (click)="scroll('input495')" >
+  Time deposits
+</button>
+<button type="button" class="btn btn-primary " (click)="scroll('input576')" >
+  Finance lease
+</button>
+<button type="button" class="btn btn-primary " (click)="scroll('input690')" >
+  Reserved 3 (equity)
+</button>
+<button type="button" class="btn btn-primary " (click)="scroll('input693')" >
+  Income
+</button>
+<button type="button" class="btn btn-primary " (click)="scroll('input738')" >
+  Cost of services
+</button>
+<button type="button" class="btn btn-primary " (click)="scroll('input741')" >
+  Other income
+</button>
+<button type="button" class="btn btn-primary " (click)="scroll('input762')" >
+  Operating expenses
+</button>
+<button type="button" class="btn btn-primary " (click)="scroll('input1368')" >
+  Finance costs
+</button>
+<button type="button" class="btn btn-primary " (click)="scroll('input1386')" >
+  Income tax expense
 </button>
 <button type="button" class="btn btn-primary " (click)="scroll('input1392')" >
-  Scroll to bottom
+  Bottom
 </button> 
 
 
