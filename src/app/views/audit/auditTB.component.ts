@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  ElementRef } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { Observable } from 'rxjs';
@@ -12,6 +13,7 @@ import {
   Data,
   Router,
 } from '@angular/router';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   templateUrl: 'auditTB.component.html',
@@ -33,11 +35,21 @@ import {
       :host >>> .panel.customClass .panel-body {
         padding: 0px;
       }
+      
+      .table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td {
+        padding: 1px;
+        }
+        .overlay-button{
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          color: black;
+        }
     `
   ],
 })
 export class AuditTBComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private elementRef: ElementRef, private viewportScroller: ViewportScroller) {
     console.log('contructing AuditTBComponent');
   }
   customClass = 'customClass';
@@ -58,16 +70,23 @@ export class AuditTBComponent implements OnInit {
     'Current Year Adjustment',
     'Current Year Audit',
   ];
+  //thisStartTime = new Date().getTime();
+  //thisEndTime = new Date().getTime();
   // adjustment for Opening Adjustment
   // adjustment for Exchange Difference
   // adjustment for Audit Fee
   // adjustment for Depreciation
   fetch(cb) {
     const req = new XMLHttpRequest();
+    //this.thisStartTime = new Date().getTime();
     req.open('GET', `assets/data/TBTemplate.json`);
 
     req.onload = () => {
+      //this.thisEndTime = new Date().getTime();
+      //console.log("!!!!!! SSSSSSSSSSSSSSSSSSSS  used1:"+( (this.thisEndTime -this.thisStartTime)  / 1000.0 )+" seconds");
       cb(JSON.parse(req.response));
+      //this.thisEndTime = new Date().getTime();
+      //console.log("!!!!!! SSSSSSSSSSSSSSSSSSSS  used:"+( (this.thisEndTime -this.thisStartTime)  / 1000.0 )+" seconds");
     };
 
     req.send();
@@ -77,7 +96,56 @@ export class AuditTBComponent implements OnInit {
     localStorage.setItem('accountList',JSON.stringify(this.accountList));
     return;
   }
+  scroll(id: any){
+    this.viewportScroller.scrollToAnchor(id);
+  }
 
+  scrollToTop(){
+    this.viewportScroller.scrollToPosition([0,0]);
+  }
+
+  keytab(event) {
+    event.preventDefault();
+    let myid = event.srcElement.attributes.id.nodeValue;
+    console.log("id0: "+ myid.replace("input",""));
+    let myidInt = parseInt(myid.replace("input",""));
+  
+    console.log("id1: "+ myidInt);
+    console.log("id2: "+ (myidInt+1));
+    document.getElementById('input'+(myidInt+1)).focus();
+    
+
+    // event.preventDefault();
+    
+    // let element = event.srcElement.nextElementSibling; // get the sibling element
+
+    // if(element == null) {  // check if its null
+    //   console.log("haha");
+    //   return;
+    // }
+    // else {
+    //   console.log("hehe");
+    //     element.focus();   // focus if not null
+    // }
+  }
+  getSumLA() {
+    let  sum = 0.0;
+    for(let rawRecord of this.thisTB) {
+      if (rawRecord['Last Year Audit']) {
+        sum += parseFloat(rawRecord['Last Year Audit']);
+      }
+    }
+    return sum;
+  }
+  getSumCA() {
+    let  sum = 0.0;
+    for(let rawRecord of this.thisTB) {
+      if (rawRecord['Current Year Pe Client']) {
+        sum += parseFloat(rawRecord['Current Year Pe Client']);
+      }
+    }
+    return sum;
+  }
   getAdjustmentForHeader(input: [] ) {
     let returnStr: string;
     returnStr = '';

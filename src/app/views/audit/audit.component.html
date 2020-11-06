@@ -1,20 +1,33 @@
 <div class="animated fadeIn">
   <h1 class="display-3">Audit</h1>
-  <div class="input-group input-group-lg">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">For Year:</span>
-    </div>
-    <input type="text"
-    placeholder="Datepicker"
-    class="form-control"
-    minMode="year"
-    [bsConfig]="{ dateInputFormat: 'YYYY' }"
-    [(ngModel)]="currentYear"
-    (ngModelChange)="yearChange()"
-    bsDatepicker>
+  
+  <div class="form-group">
+    <label for="exampleInputEmail1">Company Name</label>
+    <ng-template #customItemTemplate let-model="item" let-index="index">
+      <h5>{{model["Company Name"]}} </h5>
+    </ng-template>
+    <input [(ngModel)]="selected" [typeahead]="accountList" typeaheadOptionField="Company Name" [typeaheadMinLength]="0"
+      (ngModelChange)="typeaheadNoResults($event)" [typeaheadItemTemplate]="customItemTemplate" class="form-control">
+    <small id="emailHelp" class="form-text text-muted"> Create account only if it is not exist</small>
   </div>
-  <hr/>
-  <ngx-datatable class="bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
+  
+  
+  <div *ngIf="!noResult">
+    <!-- <div class="input-group input-group-lg">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">For Year:</span>
+      </div>
+      <input type="text"
+      placeholder="Datepicker"
+      class="form-control"
+      minMode="year"
+      [bsConfig]="{ dateInputFormat: 'YYYY' }"
+      [(ngModel)]="currentYear"
+      (ngModelChange)="yearChange()"
+      bsDatepicker>
+    </div> 
+    <hr/> -->
+    <ngx-datatable class="bootstrap fullscreen" [headerHeight]="50" [limit]="100" [columnMode]="'force'"
     [footerHeight]="50" [rowHeight]="'auto'" [rows]="tableRows" [scrollbarH]="true">
     <ngx-datatable-column *ngFor="let label of tableHeaders" [name]="label.name" [prop]="label.prop" [sortable]="true">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
@@ -29,19 +42,31 @@
   </ngx-datatable>
   <hr/>
   <br>
-  <br>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Company Name</label>
-    <ng-template #customItemTemplate let-model="item" let-index="index">
-      <h5>{{model["Company Name"]}} </h5>
-    </ng-template>
-    <input [(ngModel)]="selected" [typeahead]="accountList" typeaheadOptionField="Company Name" [typeaheadMinLength]="0"
-      (ngModelChange)="typeaheadNoResults($event)" [typeaheadItemTemplate]="customItemTemplate" class="form-control">
-    <small id="emailHelp" class="form-text text-muted"> Create account only if it is not exist</small>
+  <br>   
   </div>
-  <div class="alert alert-danger" *ngIf="!noResult">Company Already Exist </div>
-  <button type="button" class="btn btn-primary" [disabled]="!noResult" [routerLink]="['/audit','coinfo',selected,currentYearString]"
-    [hidden]="!selected || !noResult">Start New Audit</button>
-  <button type="button" class="btn btn-primary" [disabled]="noResult" (click)='continue(selectedIndex)'
-    [hidden]="!selected || noResult">Contine Audit Process for {{selected}}</button>
+  <!-- <button type="button" class="btn btn-primary" [disabled]="!noResult" [routerLink]="['/audit','coinfo',selected,currentYearString]"
+    [hidden]="!selected || !noResult">Start New Audit</button> -->
+
+    <div class="form-row" [hidden]="!selected || noResult">
+      <div class="form-group col-md-6">
+        <button type="button" class="btn btn-primary" (click)='newAudit()'
+        >Start New Audit Year</button>
+      </div>
+      <div class="form-group col-md-3">
+        <input type="text"
+    placeholder="Datepicker"
+    class="form-control"
+    minMode="year"
+    [bsConfig]="{ dateInputFormat: 'YYYY' }"
+    [(ngModel)]="currentYear"
+    (ngModelChange)="yearChange()"
+    bsDatepicker>
+    </div>
+    <div class="form-group col-md-3">
+      - {{  currentYear.getFullYear() +1 }}
+    </div>
+    <div class="form-group" >
+ 
+    
+  </div>
 </div>

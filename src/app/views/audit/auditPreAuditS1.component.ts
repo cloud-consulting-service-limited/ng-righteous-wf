@@ -65,10 +65,12 @@ export class AuditPreAuditS1Component implements OnInit {
      return returnString;
    }
   requestDocument(): void {
-    console.log("next");
+    this.document['sentDate'] = new Date();
   }
   confirmDocument(): void {
     console.log("next");
+    this.router.navigate(['audit', 'TB', this.accountInfo['Company Name'],this.currentYearString]);
+
   }
   ngOnInit(): void {
     // generate random values for mainChart

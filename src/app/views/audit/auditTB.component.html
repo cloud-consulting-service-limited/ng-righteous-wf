@@ -1,8 +1,106 @@
+
 <div class="animated fadeIn">
+    <!-- 
   <h1 class="display-3">TB</h1>
   <hr />
+
   <accordion>
     <accordion-group heading="TB" [isOpen]="true">
+      -->
+      <table class="table-condensed">
+        <thead>
+          <tr class="table-condensed">
+            <th >#</th>
+            <th >Account break down</th>
+            <th >Group as per audit record</th>
+            <th >Last Year Audit</th>
+            <th >Current Year Per Client</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of thisTB; index as i" class="table-condensed" >
+            <td class="table-condensed">{{i}}</td>
+            <td class="table-condensed" width="300px"><input style="width:100%" id="input{{i*3}}" type="text" class=".input-sm" [(ngModel)]='row["Account break down"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }}" (keyup.enter)="keytab($event)" /></td>
+            <td class="table-condensed" width="300px"><input style="width:100%" type="text" class=".input-sm" [(ngModel)]='row["Group as per audit record"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }}" (keyup.enter)="keytab($event)" readonly /></td>
+            <td class="table-condensed" width="200px"><input style="width:100%" id="input{{i*3+1}}"  type="number" step="1.0"  class=".input-sm" [(ngModel)]='row["Last Year Audit"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }}" (keyup.enter)="keytab($event)" /></td>
+            <td class="table-condensed" width="200px"><input style="width:100%" id="input{{i*3+2}}"  type="number" step="1.0"  class=".input-sm" [(ngModel)]='row["Current Year Pe Client"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }}" (keyup.enter)="keytab($event)" /></td>
+            <!-- 
+            <td class="table-condensed"> 
+              
+              <accordion>
+                <accordion-group [isOpen]="false" [panelClass]="customClass">
+                  <span accordion-heading>
+                    {{ getAdjustmentForHeader(row["Current Year Adjustment"]) }}
+                  </span>
+                  <div class="input-group ">
+                    <div class="input-group-prepend ">
+                      <span class="input-group-text "
+                        style="width: 150px;">{{row["Current Year Adjustment"][0]["name"]}}</span>
+                    </div>
+                    <input type="number" step="1.0" class=".input-sm" aria-describedby="basic-addon3"
+                    [(ngModel)]='row["Current Year Adjustment"][0]["value"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }}"/>
+                  </div>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        style="width: 150px;">{{row["Current Year Adjustment"][1]["name"]}}</span>
+                    </div>
+                    <input type="number" step="1.0" class=".input-sm" aria-describedby="basic-addon3"
+                    [(ngModel)]='row["Current Year Adjustment"][1]["value"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }}"/>
+                  </div>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        style="width: 150px;">{{row["Current Year Adjustment"][2]["name"]}}</span>
+                    </div>
+                    <input type="number" step="1.0" class=".input-sm" aria-describedby="basic-addon3"
+                    [(ngModel)]='row["Current Year Adjustment"][2]["value"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }}"/>
+                  </div>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        style="width: 150px;">{{row["Current Year Adjustment"][3]["name"]}}</span>
+                    </div>
+                    <input type="number" step="1.0" class=".input-sm" aria-describedby="basic-addon3"
+                    [(ngModel)]='row["Current Year Adjustment"][3]["value"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 } }"/>
+                  </div>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <input type="text" class=".input-sm" style="width: 150px;" aria-describedby="basic-addon3"
+                      [(ngModel)]='row["Current Year Adjustment"][4]["name"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }"/>
+                    </div>
+                    <input type="number" step="1.0" class=".input-sm" aria-describedby="basic-addon3"
+                    [(ngModel)]='row["Current Year Adjustment"][4]["value"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }"/>
+                  </div>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <input type="text" class=".input-sm" style="width: 150px;" aria-describedby="basic-addon3"
+                      [(ngModel)]='row["Current Year Adjustment"][5]["name"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }"/>
+                    </div>
+                    <input type="number" step="1.0" class=".input-sm" aria-describedby="basic-addon3"
+                    [(ngModel)]='row["Current Year Adjustment"][5]["value"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }"/>
+                  </div>
+                </accordion-group>
+              </accordion>
+              
+            </td>
+            
+            <td class="table-condensed"><input type="text" class=".input-sm" [(ngModel)]='row["Current Year Audit"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }"/></td>
+          -->
+          </tr>
+          <tr >
+            <td class="table-condensed" colspan="5"><hr/></td>
+          </tr>
+          <tr >
+            <td class="table-condensed">Sum</td>
+            <td class="table-condensed" width="300px"></td>
+            <td class="table-condensed" width="300px"></td>
+            <td class="table-condensed" width="200px">{{getSumLA() | number:'2.2-2'}}</td>
+            <td class="table-condensed" width="200px">{{getSumCA() | number:'2.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- 
       <ngx-datatable class="bootstrap " [headerHeight]="50" [messages]="{emptyMessage:''}" [columnMode]="'force'"
         [footerHeight]="0" [rowHeight]="'auto'" [rows]="thisTB" [scrollbarH]="true">
 
@@ -120,12 +218,32 @@
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
+      -->
+      <!-- 
     </accordion-group>
+    
 
   </accordion>
+  -->
+  <hr/>
 
   <button type="button" class="btn btn-primary btn-lg float-left" (click)="genDocSend()" >
     Proceed to Generate Report and send to client
   </button>
 
+</div>
+
+<div class="fixed-bottom">
+  <div class="btn-group-vertical float-right">
+  
+
+<button type="button" class="btn btn-primary " (click)="scrollToTop()" >
+  Scroll to top
+</button>
+<button type="button" class="btn btn-primary " (click)="scroll('input1392')" >
+  Scroll to bottom
+</button> 
+
+
+</div>
 </div>
