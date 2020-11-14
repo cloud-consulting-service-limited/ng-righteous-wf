@@ -1,7 +1,10 @@
-<div class="animated fadeIn">
+<div class="animated fadeIn" >
   <h1 class="display-3">Pre Audit Docuemnt (S1)</h1>
   <hr />
   <accordion>
+    <accordion-group heading="Link to upload document" [isOpen]="false">
+      <a href="{{getLinksToUpload()}}"  target=”_blank” >{{getLinksToUpload()}}</a>
+    </accordion-group>
     <accordion-group heading="Customer Document Upload History" [isOpen]="false">
       <ngx-datatable class="bootstrap " [headerHeight]="50" [limit]="3" [messages]="{emptyMessage:''}"
         [columnMode]="'force'" [footerHeight]="30" [rowHeight]="'auto'" [rows]="auditInfo['documentsUploaded']"
@@ -13,17 +16,17 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="File Type" [sortable]="false">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <label class="form-control">File Type</label>
+            <label class="form-control">{{auditInfo['documentsUploaded'][rowIndex]['File Type']}}</label>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="File Name" [sortable]="false">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <label class="form-control">File Name</label>
+            <label class="form-control">{{auditInfo['documentsUploaded'][rowIndex]['File Name']}}</label>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Uploaded Date" [sortable]="false">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <label class="form-control"></label>
+            <label class="form-control">{{auditInfo['documentsUploaded'][rowIndex]['Uploaded Date']}}</label>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
@@ -134,11 +137,6 @@
       <ngx-datatable class="bootstrap " [headerHeight]="50" [limit]="3" [messages]="{emptyMessage:''}"
         [columnMode]="'force'" [footerHeight]="30" [rowHeight]="'auto'" [rows]="auditInfo['documents']"
         [scrollbarH]="true">
-        <ngx-datatable-column name="#" [sortable]="false" maxWidth="40">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <label>{{rowIndex+1}}</label>
-          </ng-template>
-        </ngx-datatable-column>
         <ngx-datatable-column name="Sent Date" [sortable]="false">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <label

@@ -16,7 +16,7 @@ import {
 import { LoginComponent } from '../login/login.component';
 
 @Component({
-  templateUrl: 'auditTB.component.html',
+  templateUrl: 'auditTBAdj.component.html',
   styles: [
     `
       .input-group > .input-group-prepend {
@@ -48,9 +48,9 @@ import { LoginComponent } from '../login/login.component';
     `
   ],
 })
-export class AuditTBComponent implements OnInit {
+export class AuditTBAdjComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private elementRef: ElementRef, private viewportScroller: ViewportScroller) {
-    console.log('contructing AuditTBComponent');
+    console.log('contructing AuditTBAdjComponent');
   }
   customClass = 'customClass';
   accountDetail = {};
@@ -61,6 +61,8 @@ export class AuditTBComponent implements OnInit {
   id: string;
   currentYearString: string;
   thisTB: [];
+  thisAdjustment = [{"account":"","type":"","Adjustment":""}];
+  thisAdjustmentTypes = ["Opening adjustments", "Exchange difference" ,"Audit fee", "Depreciation"];
   thisHeaders = [
     'Account break down',
     'Group as per audit record',
@@ -76,10 +78,18 @@ export class AuditTBComponent implements OnInit {
   // adjustment for Exchange Difference
   // adjustment for Audit Fee
   // adjustment for Depreciation
+  addAddjustment(thisIndex) {
+    let temp = [...this.thisAdjustment];
+    console.log("thisIndex: "+thisIndex);
+    let myindex = thisIndex?thisIndex:temp.length;
+    console.log("myindex: "+myindex);
+    temp.splice(myindex,0,{"account":"","type":"","Adjustment":""});
+    this.thisAdjustment = temp;
+  }
   fetch(cb) {
     const req = new XMLHttpRequest();
     //this.thisStartTime = new Date().getTime();
-    req.open('GET', 'assets/data/TBTemplate.json');
+    req.open('GET', `assets/data/TBTemplate.json`);
 
     req.onload = () => {
       //this.thisEndTime = new Date().getTime();
@@ -93,13 +103,7 @@ export class AuditTBComponent implements OnInit {
   }
   genDocSend(){
     this.auditInfo['TB'] = this.thisTB;
-    if (!this.accountInfo['audit']) 
-        this.accountInfo['audit'] = {};
-    if (!this.accountInfo['audit'][this.currentYearString])
-      this.accountInfo['audit'][this.currentYearString] = {};
-    this.accountInfo['audit'][this.currentYearString]['TB'] = this.thisTB;
     localStorage.setItem('accountList',JSON.stringify(this.accountList));
-    this.router.navigate(['audit', 'TBAdj', this.accountInfo['Company Name'],this.currentYearString]);
     return;
   }
   scroll(id: any){
@@ -133,6 +137,17 @@ export class AuditTBComponent implements OnInit {
     //   console.log("hehe");
     //     element.focus();   // focus if not null
     // }
+  }
+  
+  getSumAdjustment() {
+    let  sum = 0.0;
+    if (!this.thisAdjustment) return sum;
+    for(let rawRecord of this.thisAdjustment) {
+      if (rawRecord['Adjustment']) {
+        sum += parseFloat(rawRecord['Adjustment']);
+      }
+    }
+    return sum;
   }
   getSumLA() {
     let  sum = 0.0;
@@ -168,6 +183,7 @@ export class AuditTBComponent implements OnInit {
       return 'Add Adjustment';
     }
   }
+  
   ngOnInit(): void {
     // generate random values for mainChart
     this.route.params.subscribe((params) => {
@@ -212,9 +228,7 @@ export class AuditTBComponent implements OnInit {
       ) {
         this.auditInfo = this.accountInfo['audit'][this.currentYearString];
       }
-      
       if (!this.auditInfo['TB']) {
-        console.log('fetching defaults:');
         this.fetch((data) => {
           this.thisTB = data;
         });

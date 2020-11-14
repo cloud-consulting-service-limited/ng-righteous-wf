@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
+import { FormsModule } from '@angular/forms';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -20,6 +20,7 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
+import { UploadComponent } from './views/upload/upload.component';
 import { RegisterComponent } from './views/register/register.component';
 
 const APP_CONTAINERS = [
@@ -41,6 +42,8 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MockHttpCalIInterceptor } from './services/http.interceptor';
 
 @NgModule({
   imports: [
@@ -55,7 +58,9 @@ import { ChartsModule } from 'ng2-charts';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    HttpClientModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
@@ -63,12 +68,14 @@ import { ChartsModule } from 'ng2-charts';
     P404Component,
     P500Component,
     LoginComponent,
+    UploadComponent,
     RegisterComponent
   ],
   providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+    provide: LocationStrategy, 
+    useClass: HashLocationStrategy,
+  }, {provide: HTTP_INTERCEPTORS, useClass: MockHttpCalIInterceptor, multi: true}
+],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

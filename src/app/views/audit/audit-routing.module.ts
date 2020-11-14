@@ -5,6 +5,7 @@ import { AuditComponent } from './audit.component';
 import { AuditCoInfoComponent } from './auditCoInfo.component';
 import { AuditPreAuditS1Component } from './auditPreAuditS1.component';
 import { AuditTBComponent } from './auditTB.component';
+import { AuditTBAdjComponent } from './auditTBAdj.component';
 import { AuditTrackingComponent } from './auditTracking.component';
 
 
@@ -85,6 +86,31 @@ const routes: Routes = [
             component: AuditTBComponent,
             data: {
               title: 'Audit -> 2. Input TB'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: 'TBAdj',
+    component: AuditTBAdjComponent,
+    data: {
+      title: 'Audit / 3. Input TB Adjustment'
+    },
+    children: [
+      {
+        path: ':id',
+        component: AuditTBAdjComponent,
+        data: {
+          title: 'Audit / 3. Input TB Adjustment'
+        },
+        children: [
+          {
+            path: ':year',
+            component: AuditTBAdjComponent,
+            data: {
+              title: 'Audit -> 3. Input TB Adjustment'
             }
           }
         ]

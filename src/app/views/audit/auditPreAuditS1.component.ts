@@ -34,6 +34,17 @@ export class AuditPreAuditS1Component implements OnInit {
   myroute = {};
   id: string;
   currentYearString: string;
+  
+  
+  getLinksToUpload() {
+    let linkContent={};
+    linkContent['Company Name'] = this.accountInfo['Company Name'];
+    linkContent['Upload Type'] = "PreAudit";
+    linkContent['Type Details'] = {};
+    linkContent['Type Details']['Audit Year'] = this.currentYearString;
+
+    return window.location.href.split('#')[0]+"#/upload?id="+btoa(JSON.stringify(linkContent));
+  }
 
 
   document = {};
@@ -65,10 +76,30 @@ export class AuditPreAuditS1Component implements OnInit {
      return returnString;
    }
   requestDocument(): void {
+    this.document['documentRequestList'] = this.documentRequestList;
+    var cnt = 0;
+    for (var i = 0; i < this.documentRequestList.length; i++) {
+      if (this.documentRequestList[i]['Asked']) {
+        cnt++;
+      }
+    }
     this.document['sentDate'] = new Date();
+    this.document['documentAskedCount'] = cnt;
+    let documents = [...this.auditInfo['documents']];
+    if (this.auditInfo['documents']) {
+      documents.unshift(this.document);
+      this.auditInfo['documents'] = documents
+    } else {
+      documents.push(this.document);
+      this.auditInfo['documents'] = documents;
+    }
+    this.document = JSON.parse(JSON.stringify(this.document));
+    localStorage.setItem('accountList', JSON.stringify(this.accountList));
   }
   confirmDocument(): void {
     console.log("next");
+    this.auditInfo['Audit Status'] = "2. Input TB"
+    localStorage.setItem('accountList', JSON.stringify(this.accountList));
     this.router.navigate(['audit', 'TB', this.accountInfo['Company Name'],this.currentYearString]);
 
   }
@@ -108,6 +139,11 @@ export class AuditPreAuditS1Component implements OnInit {
       }
       if (this.accountInfo['audit'] && this.accountInfo['audit'][this.currentYearString]) {
         this.auditInfo = this.accountInfo['audit'][this.currentYearString];
+      }
+
+      if (this.auditInfo['documents'] && this.auditInfo['documents'][0]) {
+        this.document = JSON.parse(JSON.stringify(this.auditInfo['documents'][0]));
+        this.documentRequestList = this.document['documentRequestList'];
       }
 
     });

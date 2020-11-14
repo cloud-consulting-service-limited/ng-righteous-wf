@@ -1,0 +1,94 @@
+
+<div class="animated fadeIn">
+  <accordion>
+    <accordion-group heading="TB Summary" [isOpen]="true">
+      <table class="table-condensed">
+        <thead>
+          <tr class="table-condensed">
+            <th >#</th>
+            <th >Account break down</th>
+            <th >Group as per audit record</th>
+            <th >Last Year Audit</th>
+            <th >Current Year Per Client</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let row of thisTB; index as i" >
+            <tr class="table-condensed" *ngIf="row['Last Year Audit'] || row['Current Year Per Client'] ">
+              <td class="table-condensed">{{i}}</td>
+              <td class="table-condensed" width="300px">{{row["Account break down"]}} </td>
+              <td class="table-condensed" width="300px">{{row["Group as per audit record"]}}</td>
+              <td class="table-condensed" width="200px">{{row["Last Year Audit"]}}</td>
+              <td class="table-condensed" width="200px">{{row["Current Year Per Client"]}}</td>
+            </tr>
+          </ng-container>
+          <tr >
+            <td class="table-condensed" colspan="5"><hr/></td>
+          </tr>
+          <tr >
+            <td class="table-condensed">(Profit)/ Loss</td>
+            <td class="table-condensed" width="300px"></td>
+            <td class="table-condensed" width="300px"></td>
+            <td class="table-condensed" width="200px">{{getSumLA() | number:'2.2-2'}}</td>
+            <td class="table-condensed" width="200px">{{getSumCA() | number:'2.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
+      </accordion-group>
+      <accordion-group heading="Addjustment" [isOpen]="true">
+        <table class="table-condensed">
+          <thead>
+            <tr class="table-condensed">
+              <th >#</th>
+              <th width="400px">Account break down / Group as per audit record </th>
+              <th width="300px">Adjustment Type</th>
+              <th width="200px">Adjustment Value</th>
+              <th width="100px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let row of thisAdjustment; index as i" >
+              <tr class="table-condensed">
+                <td class="table-condensed">{{i}}</td>
+                <td> 
+                  
+                     <select class="custom-select">
+                       <ng-container *ngFor="let row of thisTB; index as i">
+                      <option value="{{index}}" *ngIf="row['Last Year Audit'] || row['Current Year Per Client'] ">
+                        {{row["Account break down"]}} / {{row["Group as per audit record"]}}
+                      </option>
+                     </ng-container>
+                    </select>
+                </td>
+                <td class="table-condensed" width="300px">
+                  <input [(ngModel)]='row["Account"]' [typeahead]="thisAdjustmentTypes" [typeaheadMinLength]="0"
+                     class="form-control"></td>
+                <td class="table-condensed" width="200px"><input style="width:100%"  type="number" step="1.0"  class=".input-sm" [(ngModel)]='row["Adjustment"]' ng-model-options="{'updateOn': 'default blur', 'debounce': { 'default': 250, 'blur': 0 }}" /></td>
+                <td class="table-condensed" width="200px"><button type="button" class="btn btn-primary" (click)="addAddjustment(i+1)" >
+                  + 
+                </button></td>
+              </tr>
+            </ng-container>
+            <tr >
+              <td class="table-condensed" colspan="5"><hr/></td>
+            </tr>
+            <tr >
+              <td class="table-condensed">Balance</td>
+              <td class="table-condensed" width="400px"></td>
+              <td class="table-condensed" width="300px"></td>
+              <td class="table-condensed" width="200px">{{getSumAdjustment() | number:'2.2-2'}}</td>
+              <td class="table-condensed" width="100px"></td>
+            </tr>
+          </tbody>
+        </table>
+        </accordion-group>
+      </accordion>
+
+  <hr/>
+
+  <button type="button" class="btn btn-primary btn-lg float-left" (click)="genDocSend()" >
+    Proceed to Adjustments
+  </button>
+
+</div>
+
